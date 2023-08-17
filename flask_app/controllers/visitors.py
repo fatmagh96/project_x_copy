@@ -13,6 +13,10 @@ def register_user():
     #template 
     return render_template('registration.html')
 
+@app.route('/register_project')
+def register_project():
+    return render_template('project_upload.html')
+
 @app.route('/explore')
 def explore():
     return render_template('all_projects.html')
