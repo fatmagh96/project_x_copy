@@ -10,6 +10,7 @@ def index():
 
 @app.route('/registration')
 def register_user():
+    #template 
     return render_template('registration.html')
 
 @app.route('/explore')
