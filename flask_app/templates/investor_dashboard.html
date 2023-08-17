@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.1/dist/cerulean/bootstrap.min.css">
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='investor_dashboard.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+    <title>Investor Dashboard</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg nav_background py-2" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+            <img src="{{ url_for('static', filename='assets/logo1-removebg-preview.png') }}" alt="Logo" width="30" height="30" class="d-inline-block align-text-bottom">
+            Growvest
+          </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarColor03">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="/">Home
+              <span class="visually-hidden">(current)</span>
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="#">Explore</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Projects</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Separated link</a>
+            </div>
+          </li>
+        </ul>
+        <div class="me-5 ">
+            <form class="d-flex">
+                <input type="text" id="searchInput" placeholder="Search..." class="bg-light text-black">
+              <!-- <input class="form-control me-sm-2" type="search" placeholder="Search"> -->
+              <!-- <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button> -->
+            </form>
+        </div>
+        <!-- Avatar -->
+        <div class="dropdown">
+          <a
+            class="dropdown-toggle d-flex align-items-center hidden-arrow"
+            href="#"
+            id="navbarDropdownMenuAvatar"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img
+              src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+              class="rounded-circle"
+              height="30"
+              alt="Black and White Portrait of a Man"
+              loading="lazy"
+            />
+          </a>
+          <ul
+            class="dropdown-menu dropdown-menu-end"
+            aria-labelledby="navbarDropdownMenuAvatar"
+          >
+            <li>
+              <a class="dropdown-item" href="#">My profile</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Settings</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Logout</a>
+            </li>
+          </ul>
+        </div>
+        <!-- end avatar -->
+      </div>
+    </div>
+  </nav>
+
+  
+      <!-- end of nav bar -->
+      <!-- #80c886 -->
+
+    <div class="container mt-5">
+      <!-- <h1 class="text-dark d-inline-block ms-3" style="vertical-align: middle;">My Wallet</h1> -->
+      <div>
+        <h1 class="text-dark d-inline-block" style="vertical-align: middle;"><i class="bi bi-wallet"></i> My Wallet </h1>
+        
+    </div>
+      <div class="row">
+          <div class="col-8 card box ms-3">
+            <div class="mt-3 ms-3">
+              <h5>Balance</h5>
+                <!-- <img src="/assets/vector-wallet-line-black-icon-removebg-preview.png" alt="" width="40" height="40" style="vertical-align: middle;" class="mb-2"> -->
+                <h1 class=" mt-2" style="color: black; letter-spacing: 2px; font-size: 400;">10.000 $</h1>
+            </div>
+            <div class=" p-2">
+                <div class="d-flex justify-content-end">
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                      class="btn btn-block gradient-custom-4 ml-auto" style="background-color:#95f19b ; color: #121212;">Add Money to Wallet</button>
+                  </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Transfer Amount</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="">
+          <div class="form-outline mb-3">
+            <label class="form-label" for="">Amount (in TND):</label>
+            <input type="number" id="float-number" name="float-number" class="form-control" step="0.1" required>
+          </div>
+          <div class="form-outline mb-3">
+            <label class="form-label" for="">Credit Card number</label>
+            <input type="text" name="credit_card_num" id="" class="form-control">
+          </div>
+          <div class="form-outline mb-3">
+            <label class="form-label" for="">Cardholder's Name</label>
+            <input type="text" name="credit_card_name" id="" class="form-control">
+          </div>
+          <div class="d-flex gap-3 align-items-center pb-2">
+            <div class="form-outline">
+              <label class="form-label" for="typeExp">Expiration</label>
+              <input type="text" id="typeExp" class="form-control form-control-lg" placeholder="MM/YYYY"
+                size="7" id="exp" minlength="7" maxlength="7" />
+            </div>
+            <div class="form-outline">
+              <label class="form-label" for="typeText2">Cvv</label>
+              <input type="password" id="typeText2" class="form-control form-control-lg"
+                placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" />
+            </div>
+            <!-- <button type="button" class="btn btn-info btn-lg btn-rounded">
+              <i class="fas fa-arrow-right"></i>
+            </button> -->
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary">Add Money</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- end modal -->
+    <!-- tabs -->
+    <div class="container mt-5">
+        <ul class="nav nav-tabs justify-content-center" role="tablist">
+            <li class="nav-item" role="presentation">
+              <a class="nav-link active" data-bs-toggle="tab" href="#home" aria-selected="true" role="tab">My Investments</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" data-bs-toggle="tab" href="#favourites" aria-selected="false" role="tab" tabindex="-1">Favourites</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" data-bs-toggle="tab" href="#transactions" aria-selected="false" role="tab" tabindex="-1">Transaction History</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" data-bs-toggle="tab" href="#profile" aria-selected="false" role="tab" tabindex="-1">My Profile</a>
+            </li>
+          </ul>
+          <div id="myTabContent" class="tab-content">
+            <!-- Investments -->
+            <div class="tab-pane fade active show" id="home" role="tabpanel">
+              <h3 class="my-4">Investment History</h3>
+              <table class="table table-striped">
+                <thead>
+                  <th class="fw-bold">Project</th>
+                  <th class="fw-bold">Amount</th>
+                  <th class="fw-bold">Progress</th>
+                  <th class="fw-bold">Deadline</th>
+                  <th class="fw-bold">Status</th>
+                </thead>
+                <tbody>
+                  <tr class="table-warning">
+                    <td><a href="#" class="underline-on-hover1 text-dark" style="vertical-align: middle;">Amazon</a></td>
+                    <td class="fw-bolder mt-4">100$</td>
+                    <td>
+                      <span class="d-flex justify-content-between">
+                        <span class="text-success">25%</span>
+                        <span>100$/2000$</span>
+                      </span>
+                      <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </td>
+                    <td>
+                      May 12th 2015
+                    </td>
+                    <td><span class="badge rounded-pill bg-success">In Progress</span></td>
+                  </tr>
+                  <tr class="table-success">
+                    <!-- <td><a href="#" class="underline-on-hover">Magnum</a></td> -->
+                    <td><a href="#" class="underline-on-hover1 text-dark">Magnum</a></td>
+                    <td class="fw-bolder">50$</td>
+                    <td>
+                      <span class="d-flex justify-content-between">
+                        <span class="text-primary">100%</span>
+                        <span>100$/2000$</span>
+                      </span>
+                      <div class="progress">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </td>
+                    <td>
+                      May 12th 2014
+                    </td>
+                    <td><span class="badge rounded-pill bg-primary">Completed</span></td>
+                  </tr>
+                  <tr class="table-danger">
+                    <td><a href="#" class="underline-on-hover1 text-dark">Monoprix</a></td>
+                    <td class="fw-bolder">1000$</td>
+                    <td>
+                      <span class="d-flex justify-content-between">
+                        <span class="text-success">40%</span>
+                        <span>100$/2000$</span>
+                      </span>
+                      <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 40%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </td>
+                    <td>
+                      May 12th 2014
+                    </td>
+                    <td><span class="badge rounded-pill bg-danger">Dropped</span></td>
+                  </tr>
+                </tbody>
+
+              </table>
+            </div>
+            <!-- Favorites -->
+            <div class="tab-pane fade" id="favourites" role="tabpanel">
+              <table class="table mt-3">
+                <thead style="border-bottom: 1px solid #121212 ;">
+                  <th class="fw-bold">Project</th>
+                  <th class="fw-bold">Progress</th>
+                  <th class="fw-bold">Deadline</th>
+                  <th class="fw-bold"> </th>
+                  
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a href="#" class="underline-on-hover1 text-dark" style="vertical-align: middle;">Amazon</a></td>
+                    
+                    <td>
+                      <span class="d-flex justify-content-between">
+                        <span class="text-success">25%</span>
+                        <span>100$/2000$</span>
+                      </span>
+                      <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </td>
+                    <td>
+                      May 12th 2015
+                    </td>
+                    <td><span class="btn btn-danger">Remove</span></td>
+                  </tr>
+                  <tr>
+                    <!-- <td><a href="#" class="underline-on-hover">Magnum</a></td> -->
+                    <td><a href="#" class="underline-on-hover1 text-dark">Magnum</a></td>
+                    
+                    <td>
+                      <span class="d-flex justify-content-between">
+                        <span class="text-primary">100%</span>
+                        <span>100$/2000$</span>
+                      </span>
+                      <div class="progress">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </td>
+                    <td>
+                      May 12th 2014
+                    </td>
+                    <td><span class="btn btn-danger">Remove</span></td>
+                  </tr>
+                  <tr>
+                    <td><a href="#" class="underline-on-hover1 text-dark">Monoprix</a></td>
+                    
+                    <td>
+                      <span class="d-flex justify-content-between">
+                        <span class="text-success">40%</span>
+                        <span>100$/2000$</span>
+                      </span>
+                      <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 40%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </td>
+                    <td>
+                      May 12th 2014
+                    </td>
+                    <td><span class="btn btn-danger">Remove</span></td>
+                  </tr>
+                </tbody>
+
+              </table>
+            </div>
+            <!-- end favourites -->
+            <!-- my profile -->
+            <div class="tab-pane fade" id="profile" role="tabpanel">
+              
+                <div class="edit-form mt-2">
+                  <div class="row">
+                    <div class="col-5 ms-5">
+                      <h2 class="my-3">Edit Profile Information</h2>
+
+                      <form >
+                        <label for="fname">First Name:</label>
+                        <input type="text" id="fname" name="first_name" class="form-control mb-3">
+                        <label for="lname">Last Name:</label>
+                        <input type="text" id="lname" name="last_name" class="form-control mb-3">
+                        <label for="image">Choose an Avatar (JPG or PNG):</label>
+                        <input type="file" id="image" name="image" accept=".jpg, .jpeg, .png" class="form-control mb-3" required>
+                        <h5 class="my-3">Change password:</h5>
+                        <div class="card p-4">
+                          <form>
+                            <label for="current-password">Current Password:</label>
+                            <input type="password" id="current-password" name="current-password" class="form-control mb-3" required>
+                            
+                            <label for="new-password">New Password:</label>
+                            <input type="password" id="new-password" name="new-password" class="form-control mb-3" required>
+                            
+                            <label for="confirm-new-password">Confirm New Password:</label>
+                            <input type="password" id="confirm-new-password" name="confirm-new-password" class="form-control mb-3" required>
+                            
+                            <!-- <button type="submit">Change Password</button> -->
+                            <input type="button" value="Change password" class="btn btn-danger mt-1">
+                          </form>
+
+                        </div>
+                        <div class="d-flex justify-content-end my-4">
+                          <input type="button" value="Save Changes" class="btn btn-success">
+
+                        </div>
+                        <!-- <button class="btn btn-success">Save</button> -->
+                      </form>
+                    </div>
+
+                  </div>
+                
+              </div>
+            </div>
+            <!-- end profile -->
+            <!-- transaction History -->
+            <div class="tab-pane fade" id="transactions" role="tabpanel">
+              <table class="table mt-3">
+                <thead style="border-bottom: 1px solid #121212 ;">
+                  <th class="fw-bold">Transaction</th>
+                  <th class="fw-bold">Date</th>
+                  <th class="fw-bold">Amount</th>
+                  <!-- <th class="fw-bold"> </th> -->                 
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Money added to wallet</td>
+                    
+                    <td>
+                      13/12/2018 01:58
+                    </td>
+                    <td>
+                      <span class="text-success">+ 200$</span>
+                    </td>
+                    
+                  </tr>
+                  <tr>
+                    <!-- <td><a href="#" class="underline-on-hover">Magnum</a></td> -->
+                    <td>Invested in <a href="#" class="underline-on-hover1 text-dark">Magnum</a></td>
+                    
+                    <td>
+                      13/12/2018 01:58
+                    </td>
+                    <td>
+                      <span class="text-danger">- 50$</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Invested in <a href="#" class="underline-on-hover1 text-dark">Monoprix</a></td>
+                    
+                    <td>
+                      09/07/2018 08:05
+                    </td>
+                    <td>
+                      <span class="text-danger">- 1000$</span>
+                    </td>
+                  </tr>
+                </tbody>
+
+              </table>
+            </div>
+            <!-- end transactions -->
+          </div>
+
+    </div>
+  </div>
+      <!-- footer -->
+      <footer class="bg-light text-center text-lg-start mt-5">
+        <div class="container p-5">
+          <div class="row d-flex justify-content-lg-between">
+            <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+              <a class="text-decoration-none h5" style="color: #1b668c;" href="#">
+                <img src="/assets/logo1-removebg-preview.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-bottom">
+                Planet X
+              </a>
+              <!-- <h5 class="text-uppercase" style="color: #1b668c;">Project X</h5> -->
+              <p>
+                Bienvenue sur le site de la Public Benefit Corporation. Nous sommes une entreprise fière d'être un catalyseur du changement.
+              </p>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+              <h5 class="text-uppercase" style="color: #1b668c;">links</h5>
+              <ul class="list-unstyled mb-0">
+                <li class="">
+                  <a href="#!" class="text-dark" style="font-size: smaller;">Accueil</a>
+                </li>
+                <li>
+                  <a href="#!" class="text-dark" style="font-size: smaller;">À propos de nous</a>
+                </li>
+                <li>
+                  <a href="#!" class="text-dark" style="font-size: smaller;">Blog</a>
+                </li>
+                <li>
+                  <a href="#!" class="text-dark" style="font-size: smaller;">Nous contacter</a>
+                </li>
+              </ul>
+            </div>
+          </div> 
+        </div> 
+        <!-- <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+          © 2023 Public Benefit Corporation
+        </div>  -->
+      </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
