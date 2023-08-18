@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='registration.css') }}">
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+  <title>Document</title>
+</head>
+
+<body>
+
+  <!--------------------------- Modal ------------------------->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="p-2 d-flex flex-row justify-content-end">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="px-5 pt-2 pb-5 d-flex justify-content-center">
+              <h4>Login</h4>
+            </div>
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+              <label class="form-label" for="form2Example1">Email address</label>
+              <input type="email" id="form2Example1" class="form-control" />
+            </div>
+
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+              <label class="form-label" for="form2Example2">Password</label>
+              <input type="password" id="form2Example2" class="form-control" />
+            </div>
+
+            <!-- 2 column grid layout for inline styling -->
+            <div class="row mb-4">
+              <div class="col d-flex justify-content-center">
+                <!-- Checkbox -->
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
+                  <label class="form-check-label" for="form2Example31"> Remember me</label>
+                </div>
+              </div>
+
+              <div class="col">
+                <!-- Simple link -->
+                <a href="#!">Forgot password?</a>
+              </div>
+            </div>
+
+            <!-- Submit button -->
+            <div class="d-flex justify-content-center">
+              <button type="button" class="btn btn-primary btn-block mb-4 w-75">Sign in</button>
+            </div>
+
+            <!-- Register buttons -->
+            <div class="text-center">
+              <p>Not a member? <a href="/registration">Register</a></p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!----------------------- End Modal -------------------------->
+
+  <!--------------------------- NAVBAR ------------------------->
+  <nav class="navbar navbar-expand-lg nav_background py-2" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+        <img src="{{ url_for('static', filename='assets/logo1-removebg-preview.png') }}" alt="Logo" width="30"
+          height="30" class="d-inline-block align-text-bottom">
+        Growvest
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03"
+        aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarColor03">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="/">Home
+              <span class="visually-hidden">(current)</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/explore">Explore</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+              aria-expanded="false">Projects</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Separated link</a>
+            </div>
+          </li>
+        </ul>
+        <div class="me-5 ">
+          <form class="d-flex">
+            <input type="text" id="searchInput" placeholder="Search..." class="bg-light text-black">
+            <!-- <input class="form-control me-sm-2" type="search" placeholder="Search"> -->
+            <!-- <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button> -->
+          </form>
+        </div>
+
+        <div class="d-flex gap-4">
+          <a href="#" class="btn text-light underline-on-hover shadow-none" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">Log in</a>
+          <a href="/register" class="btn text-light underline-on-hover shadow-none">Sign up</a>
+
+        </div>
+
+      </div>
+    </div>
+  </nav>
+  <!--------------------------- END NAVBAR ------------------------->
+
+
+  <section class=" bg-image"
+    style="background-image: url('../static/assets/investment-background-snj8ylr71lc323ot.jpg'); background-size: cover; background-attachment: fixed; ">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+      <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+            <div class="card my-4" style="border-radius: 15px;">
+              <div class="card-body p-5">
+                <h2 class="text-uppercase text-center mb-5">Create Your Project</h2>
+                <form>
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example1cg">Project Name</label>
+                    <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
+                  </div>
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example1cg">Details Description</label>
+                    <textarea name="" id="" cols="10" rows="2" class="form-control form-control-lg"></textarea>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example3cg">Type</label>
+                    <select id="form3Example3cg" class="form-select form-select-lg" aria-label="Type">
+                      <option value="" disabled selected>Select a Type</option>
+                      <option value="category1">B2B</option>
+                      <option value="category2">B2C</option>
+                    </select>
+                  </div>
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example3cg">Category</label>
+                    <select id="choices-multiple-remove-button" placeholder="Select upto 5 tags" multiple>
+                      <option value="technology">Technology</option>
+                      <option value="engineering">Engineering</option>
+                      <option value="business">Business</option>
+                      <option value="healthcare">Healthcare</option>
+                      <option value="education">Education</option>
+                      <option value="art">Art</option>
+                      <option value="social">Social</option>
+                      <option value="research">Research</option>
+                      <option value="design">Design</option>
+                      <option value="travel">Travel</option>
+                      <option value="green-projects">Green Projects</option>
+                      <option value="development">Development</option>
+                      <option value="entertainment">Entertainment</option>
+                    </select>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example4cg">Amount Already Raised</label>
+                    <input type="number" id="form3Example4cg" class="form-control form-control-lg" />
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example4cdg">Funding Goal</label>
+                    <input type="number" id="form3Example4cdg" class="form-control form-control-lg" />
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example1cg">Funding Deadline</label>
+                    <input type="Date" id="form3Example1cg" class="form-control form-control-lg" />
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example1cg">Project Location</label>
+                    <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
+                  </div>
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example1cg">Website</label>
+                    <input type="url" id="form3Example1cg" class="form-control form-control-lg" />
+                  </div>
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example1cg">Tax Code</label>
+                    <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label">Already a Business Owner</label>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="business-owner" id="business-owner-yes"
+                        value="yes" />
+                      <label class="form-check-label" for="business-owner-yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="business-owner" id="business-owner-no"
+                        value="no" />
+                      <label class="form-check-label" for="business-owner-no">No</label>
+                    </div>
+                  </div>
+                  <div class="form-outline mb-4" id="fieldExperience" style="display: none;">
+                    <label class="form-label" for="field">Field</label>
+                    <input type="text" id="field" class="form-control form-control-lg" />
+                  </div>
+                  <div class="form-outline mb-4" id="yearsExperience" style="display: none;">
+                    <label class="form-label" for="years">Years of Experience</label>
+                    <input type="number" id="years" class="form-control form-control-lg" />
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example1cg">Bank details (RIB)</label>
+                    <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example1cg">Upload Business Plan</label>
+                    <input type="file" id="form3Example1cg" class="form-control form-control-lg" />
+                  </div>
+
+                  <div class="form-check d-flex justify-content-center mb-5">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
+                    <label class="form-check-label" for="form2Example3g">
+                      I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
+                    </label>
+                  </div>
+
+                  <div class="d-flex justify-content-center">
+                    <button type="button" class="btn btn-block btn-lg gradient-custom-4"
+                      style="background-color: #023047; color: white;">Register</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-------------------- Footer -------------------------------->
+<!-- footer -->
+<footer class="bg-light text-center text-lg-start ">
+  <div class="container p-5">
+    <div class="row d-flex justify-content-lg-between">
+      <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+        <a class="text-decoration-none h5" style="color: #1b668c;" href="#">
+          <img src="{{ url_for('static', filename='assets/logo1-removebg-preview.png') }}" alt="Logo" width="30"
+            height="30" class="d-inline-block align-text-bottom">
+          Planet X
+        </a>
+        <!-- <h5 class="text-uppercase" style="color: #1b668c;">Project X</h5> -->
+        <p>
+          Bienvenue sur le site de la Public Benefit Corporation. Nous sommes une entreprise fière d'être un
+          catalyseur du changement.
+        </p>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+        <h5 class="text-uppercase" style="color: #1b668c;">links</h5>
+        <ul class="list-unstyled mb-0">
+          <li class="">
+            <a href="#!" class="text-dark" style="font-size: smaller;">Accueil</a>
+          </li>
+          <li>
+            <a href="#!" class="text-dark" style="font-size: smaller;">À propos de nous</a>
+          </li>
+          <li>
+            <a href="#!" class="text-dark" style="font-size: smaller;">Blog</a>
+          </li>
+          <li>
+            <a href="#!" class="text-dark" style="font-size: smaller;">Nous contacter</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2023 Public Benefit Corporation
+    </div>  -->
+</footer>
+  <!--------------------End Footer -------------------------------->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
+  <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
+
+  <script>
+    $(document).ready(function () {
+
+      var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
+        removeItemButton: true,
+        maxItemCount: 5,
+        searchResultLimit: 5,
+        renderChoiceLimit: 5
+      });
+
+
+    });
+  </script>
+  
+  <script>
+
+    // ================== script of the prject form =====================
+    const businessOwnerYes = document.getElementById('business-owner-yes');
+    const businessOwnerNo = document.getElementById('business-owner-no');
+    const fieldExperience = document.getElementById('fieldExperience');
+    const yearsExperience = document.getElementById('yearsExperience');
+
+    businessOwnerYes.addEventListener('change', function () {
+      if (this.checked) {
+        fieldExperience.style.display = 'block';
+        yearsExperience.style.display = 'block';
+      } else {
+        fieldExperience.style.display = 'none';
+        yearsExperience.style.display = 'none';
+      }
+    });
+
+    businessOwnerNo.addEventListener('change', function () {
+      if (this.checked) {
+        fieldExperience.style.display = 'none';
+        yearsExperience.style.display = 'none';
+      }
+    });
+  </script>
+
+
+</body>
+
+</html>

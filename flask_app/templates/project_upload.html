@@ -122,7 +122,7 @@
         <div class="d-flex gap-4">
           <a href="#" class="btn text-light underline-on-hover shadow-none" data-bs-toggle="modal"
             data-bs-target="#exampleModal">Log in</a>
-          <a href="/registration" class="btn text-light underline-on-hover shadow-none">Sign up</a>
+          <a href="/register" class="btn text-light underline-on-hover shadow-none">Sign up</a>
 
         </div>
 
@@ -132,152 +132,146 @@
   <!--------------------------- END NAVBAR ------------------------->
 
 
-    <section class="bg-image"
-        style="background-image: url('../static/assets/investment-background-snj8ylr71lc323ot.jpg'); background-size: cover; background-attachment: fixed;">
-        <div class="mask d-flex align-items-center h-100 gradient-custom-3">
-            <div class="container h-100">
-                <div class="row  d-flex justify-content-center align-items-center h-100">
-                    <div class="col ">
-                        <div class="card my-4" style="border-radius: 15px;">
-                            <div class="card-body p-5">
-                                <h2 class="text-uppercase text-center mb-5" style="color: gray;">Upload Your Project
-                                </h2>
+  <section class="bg-image"
+    style="background-image: url('../static/assets/investment-background-snj8ylr71lc323ot.jpg'); background-size: cover; background-attachment: fixed;">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+      <div class="container h-100">
+        <div class="row  d-flex justify-content-center align-items-center h-100">
+          <div class="col ">
+            <div class="card my-4" style="border-radius: 15px;">
+              <div class="card-body p-5">
+                <h2 class="text-uppercase text-center mb-5" style="color: gray;">Upload Your Project
+                </h2>
 
-                                <!-- !*************************** Form ********************************** -->
+                <!-- !*************************** Form ********************************** -->
 
-                                <form>
-                                    <!-- -----------------upload video------------------- -->
+                <form>
+                  <!-- -----------------upload video------------------- -->
 
-                                    <div class=" col- ">
-                                        <h3>Your Video </h3>
-                                        <div class="form-group">
-                                            <label for="formFile" class="form-label mt-4">Upload video file</label>
-                                            <input class="form-control" type="file" id="formFile">
-                                        </div>
-                                    </div>
-                                    <!-- ------------------- Project registration---------------- -->
-
-                                    <div id="myTabContent" class="tab-content">
-                                        <div class="tab-pane fade show active" id="home" role="tabpanel">
-                                            <label class="h3 mt-3" for="">Description</label>
-                                            <textarea name="Description" id="" class=" form-control "
-                                                rows="5"></textarea>
-                                            <label class="h3 mt-3" for="">About Us</label>
-                                            <textarea name="about_us" id="" class=" form-control " rows="5"></textarea>
-                                            <label class="h3 mt-3" for="">Our Team</label>
-                                            <div class="d-flex flex-column" id="formfield ">
-                                                <div>
-                                                    <div class="form-group">
-                                                        <label for="formFile" class="form-label mt-4">Upload Profile
-                                                            Image</label>
-                                                        <input class="form-control" type="file" id="formFile">
-                                                    </div>
-                                                </div>
-                                                <div class="d-flex gap-2">
-                                                    <div class="mt-3">
-                                                        <label class="form-label" for="">First Name</label>
-                                                        <input type="textarea" name="first_name"
-                                                            class="text form-control mb-3 " placeholder="first_name"
-                                                            required>
-                                                    </div>
-                                                    <div class="mt-3">
-                                                        <label class="form-label" for="">Last Name</label>
-                                                        <input type="textarea" name="last_name"
-                                                            class="text form-control mb-3 " placeholder="last_name"
-                                                            required>
-                                                    </div>
-                                                </div>
-                                                <label class=" form-label" for="">Role</label>
-                                                <input type="textarea" name="role" class="text form-control mb-3 "
-                                                    placeholder="role" required>
-                                                <label class="form-label " for="">Summary</label>
-                                                <!-- <input type="textarea" name="summary" class="text form-control m-3"  placeholder="summary" required> -->
-                                                <textarea name="summary" id="" cols="300" class=" form-control mb-3  "
-                                                    rows="5"></textarea>
-                                                <button
-                                                    class=" wf-btn-cta w-full my-2 mx-auto min-h-[49px] btn btn-danger mt-3"
-                                                    onclick="addTeamMember()">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                        fill="currentColor" class="bi bi-person-plus-fill"
-                                                        viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                                                        <path fill-rule="evenodd"
-                                                            d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
-                                                    </svg>
-                                                    Add To Team</button>
-                                            </div>
-                                            <div class="controls">
-                                                <button
-                                                    class="add d-flex justify-content-center wf-btn-cta w-full my-2 mx-auto min-h-[49px] btn btn-success mt-3"
-                                                    onclick="add()">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                        fill="currentColor" class="bi bi-person-plus-fill"
-                                                        viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                                                        <path fill-rule="evenodd"
-                                                            d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
-                                                    </svg>
-                                                    Add Teammate </button>
-                                            </div>
-                                            <label class="h3 mt-3" for="">Financial</label>
-                                            <div class="form-group">
-                                                <label for="formFile" class="form-label mt-4">Default file input
-                                                    example</label>
-                                                <input class="form-control" type="file" id="formFile">
-                                            </div>
-                                            <button
-                                                class="wf-btn-cta w-full my-2 mx-auto min-h-[49px] btn btn-primary mt-3">Submit</button>
-                                        </div>
-                                    </div>
-                                </form>
-
-                                <!-- !******************** End Form ******************** -->
-                            </div>
-                        </div>
+                  <div class=" col- ">
+                    <h3>Your Video </h3>
+                    <div class="form-group">
+                      <label for="formFile" class="form-label mt-4">Upload video file</label>
+                      <input class="form-control" type="file" id="formFile">
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                  </div>
+                  <!-- ------------------- Project registration---------------- -->
 
-    <!-- **************************************footer********************************** -->
-    <footer class="bg-light text-center text-lg-start ">
-        <div class="container p-5">
-            <div class="row d-flex justify-content-lg-between">
-                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-                    <a class="text-decoration-none h5" style="color: #1b668c;" href="#">
-                        <img src="{{ url_for('static', filename='assets/logo1-removebg-preview.png') }}" alt="Logo" width="30" height="30"
-                            class="d-inline-block align-text-bottom">
-                        Planet X
-                    </a>
-                    <p>
-                        Bienvenue sur le site de la Public Benefit Corporation. Nous sommes une entreprise fière d'être
-                        un
-                        catalyseur du changement.
-                    </p>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                    <h5 class="text-uppercase" style="color: #1b668c;">links</h5>
-                    <ul class="list-unstyled mb-0">
-                        <li class="">
-                            <a href="#!" class="text-dark" style="font-size: smaller;">Accueil</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-dark" style="font-size: smaller;">À propos de nous</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-dark" style="font-size: smaller;">Blog</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-dark" style="font-size: smaller;">Nous contacter</a>
-                        </li>
-                    </ul>
-                </div>
+                  <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel">
+                      <label class="h3 mt-3" for="">Description</label>
+                      <textarea name="Description" id="" class=" form-control " rows="5"></textarea>
+                      <label class="h3 mt-3" for="">About Us</label>
+                      <textarea name="about_us" id="" class=" form-control " rows="5"></textarea>
+                      <label class="h3 mt-3" for="">Our Team</label>
+                      <div class="d-flex flex-column" id="formfield ">
+                        <div>
+                          <div class="form-group">
+                            <label for="formFile" class="form-label mt-4">Upload Profile
+                              Image</label>
+                            <input class="form-control" type="file" id="formFile">
+                          </div>
+                        </div>
+                        <div class="d-flex gap-2">
+                          <div class="mt-3">
+                            <label class="form-label" for="">First Name</label>
+                            <input type="textarea" name="first_name" class="text form-control mb-3 "
+                              placeholder="first_name" required>
+                          </div>
+                          <div class="mt-3">
+                            <label class="form-label" for="">Last Name</label>
+                            <input type="textarea" name="last_name" class="text form-control mb-3 "
+                              placeholder="last_name" required>
+                          </div>
+                        </div>
+                        <label class=" form-label" for="">Role</label>
+                        <input type="textarea" name="role" class="text form-control mb-3 " placeholder="role" required>
+                        <label class="form-label " for="">Summary</label>
+                        <!-- <input type="textarea" name="summary" class="text form-control m-3"  placeholder="summary" required> -->
+                        <textarea name="summary" id="" cols="300" class=" form-control mb-3  " rows="5"></textarea>
+                        <button class=" wf-btn-cta w-full my-2 mx-auto min-h-[49px] btn btn-danger mt-3"
+                          onclick="addTeamMember()">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                            <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                            <path fill-rule="evenodd"
+                              d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+                          </svg>
+                          Add To Team</button>
+                      </div>
+                      <div class="controls">
+                        <button
+                          class="add d-flex justify-content-center wf-btn-cta w-full my-2 mx-auto min-h-[49px] btn btn-success mt-3"
+                          onclick="add()">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                            <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                            <path fill-rule="evenodd"
+                              d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+                          </svg>
+                          Add Teammate </button>
+                      </div>
+                      <label class="h3 mt-3" for="">Financial</label>
+                      <div class="form-group">
+                        <label for="formFile" class="form-label mt-4">Default file input
+                          example</label>
+                        <input class="form-control" type="file" id="formFile">
+                      </div>
+                      <button class="wf-btn-cta w-full my-2 mx-auto min-h-[49px] btn btn-primary mt-3">Submit</button>
+                    </div>
+                  </div>
+                </form>
+
+                <!-- !******************** End Form ******************** -->
+              </div>
             </div>
+          </div>
         </div>
-    </footer>
+      </div>
+    </div>
+  </section>
+
+  <!-- footer -->
+  <footer class="bg-light text-center text-lg-start ">
+    <div class="container p-5">
+      <div class="row d-flex justify-content-lg-between">
+        <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+          <a class="text-decoration-none h5" style="color: #1b668c;" href="#">
+            <img src="{{ url_for('static', filename='assets/logo1-removebg-preview.png') }}" alt="Logo" width="30"
+              height="30" class="d-inline-block align-text-bottom">
+            Planet X
+          </a>
+          <!-- <h5 class="text-uppercase" style="color: #1b668c;">Project X</h5> -->
+          <p>
+            Bienvenue sur le site de la Public Benefit Corporation. Nous sommes une entreprise fière d'être un
+            catalyseur du changement.
+          </p>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-uppercase" style="color: #1b668c;">links</h5>
+          <ul class="list-unstyled mb-0">
+            <li class="">
+              <a href="#!" class="text-dark" style="font-size: smaller;">Accueil</a>
+            </li>
+            <li>
+              <a href="#!" class="text-dark" style="font-size: smaller;">À propos de nous</a>
+            </li>
+            <li>
+              <a href="#!" class="text-dark" style="font-size: smaller;">Blog</a>
+            </li>
+            <li>
+              <a href="#!" class="text-dark" style="font-size: smaller;">Nous contacter</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2023 Public Benefit Corporation
+    </div>  -->
+  </footer>
+
+
 </body>
 
 
