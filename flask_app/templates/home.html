@@ -399,13 +399,6 @@
       </div>
     </div>
 
-
-
-
-
-
-
-
     <div class="bg-gradient mt-5">
       <div class="px-2 xs:px-6 pt-16 lg:pt-20 bg-white/80">
         <div class="container max-w-4xl mx-auto space-y-2 text-center ">
@@ -488,7 +481,18 @@
   <!--------------------End Footer -------------------------------->
 
 
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.5.2/js/bootstrap.bundle.min.js"></script>
+  <script>
+      document.addEventListener('DOMContentLoaded', function () {
+          var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+  
+          // Check if the "open_modal" query parameter is present in the URL
+          const urlParams = new URLSearchParams(window.location.search);
+          if (urlParams.has('open_modal')) {
+              myModal.show();
+          }
+      });
+  </script>
 
 
 </body>

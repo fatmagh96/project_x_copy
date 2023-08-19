@@ -13,3 +13,7 @@ def po_dashboard_cyp():
 def po_dashboard_pending():
     return render_template('dashboard_po_Pending.html')
 
+@app.route('/project/upload')
+def upload_project():
+    return render_template('project_upload.html')
+
