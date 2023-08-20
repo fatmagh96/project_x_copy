@@ -21,6 +21,7 @@
 <body>
 
     <!---------------------------- NAV BAR ------------------------------------>
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg nav_background py-2" data-bs-theme="dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">
@@ -43,17 +44,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/explore">Explore</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                            aria-haspopup="true" aria-expanded="false">Projects</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a>
-                        </div>
-                    </li>
+
                 </ul>
                 <div class="me-5 ">
                     <form class="d-flex">
@@ -62,48 +53,60 @@
                         <!-- <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button> -->
                     </form>
                 </div>
+
+                {% if 'id' in session %}
                 <!-- Avatar -->
                 <div class="dropdown">
                     <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#"
                         id="navbarDropdownMenuAvatar" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" height="30"
-                            alt="Black and White Portrait of a Man" loading="lazy" />
+                        <img src="{{ url_for('static', filename='assets/avatar.png') }}" class="rounded-circle"
+                            height="30" alt="Black and White Portrait of a Man" loading="lazy" />
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
                         <li>
-                            <a class="dropdown-item" href="#">My profile</a>
+                            <a class="dropdown-item" href="/dashboard">My profile</a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="#">Settings</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#">Logout</a>
+                            <a class="dropdown-item" href="/logout">Logout</a>
                         </li>
                     </ul>
                 </div>
                 <!-- end avatar -->
+
+                {% else %}
+                <div class="d-flex gap-4">
+                    <!-- data-bs-toggle="modal" data-bs-target="#SignInModal"  -->
+                    <a href="/signin" class="btn text-light underline-on-hover shadow-none">Log in</a>
+                    <a href="/register" class="btn text-light underline-on-hover shadow-none">Sign up</a>
+
+                </div>
+                {% endif %}
+
             </div>
         </div>
     </nav>
+    <!-- end navbar -->
     <!---------------------------- END NAV BAR ------------------------------------>
+
     <div class="container mb-4">
         <div class="row mt-5">
             <div class="col-12">
-                <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex gap-4 align-items-center">
                     <div class="d-flex gap-4">
                         <h1>Project Title</h1>
-                        <!-- <button class="btn shadow-none text-dark underline-on-hover "><i class="bi bi-pencil-fill">
-                                Edit</i></button> -->
                     </div>
                     <h4>
-                            <span class="badge rounded-pill text-bg-warning text-white px-5 py-1" >Pending</span>                        
+                        <span class="badge rounded-pill text-bg-warning text-white px-3 py-1">Pending</span>
                     </h4>
                 </div>
                 <div class="d-flex gap-4">
-                    <p name="submited_at">
+                    <p name="submitted_at">
                         Submitted at : dd/mm/yy
                     </p>
-                    
+
                 </div>
             </div>
         </div>
@@ -172,7 +175,8 @@
                 <!-- Team ------------------------------->
                 <div class="tab-pane fade" id="team" role="tabpanel">
                     <div class="container p-5 m-5 d-flex justify-content-center ">
-                        <div class="card justify-content-center" style="height:200px ; width:500px ; border-style: none; box-shadow: none;">
+                        <div class="card justify-content-center"
+                            style="height:200px ; width:500px ; border-style: none; box-shadow: none;">
                             <h3 class="text-center">Pending ...</h3>
                         </div>
                     </div>
@@ -181,7 +185,8 @@
                 <!--End Updates ----------------------------->
                 <div class="tab-pane fade" id="updates" role="tabpanel">
                     <div class="container p-5 m-5 d-flex justify-content-center ">
-                        <div class="card justify-content-center" style="height:200px ; width:500px ; border-style: none; box-shadow: none;">
+                        <div class="card justify-content-center"
+                            style="height:200px ; width:500px ; border-style: none; box-shadow: none;">
                             <h3 class="text-center">Pending ...</h3>
                         </div>
                     </div>
@@ -199,47 +204,44 @@
 
 
 
-   <!-------------------- Footer -------------------------------->
-  <!-- footer -->
-  <footer class="bg-light text-center text-lg-start ">
-    <div class="container p-5">
-      <div class="row d-flex justify-content-lg-between">
-        <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-          <a class="text-decoration-none h5" style="color: #1b668c;" href="#">
-            <img src="{{ url_for('static', filename='assets/logo1-removebg-preview.png') }}" alt="Logo" width="30"
-              height="30" class="d-inline-block align-text-bottom">
-            Growvest
-          </a>
-          <!-- <h5 class="text-uppercase" style="color: #1b668c;">Project X</h5> -->
-          <p>
-            Bienvenue sur le site de la Public Benefit Corporation. Nous sommes une entreprise fière d'être un
-            catalyseur du changement.
-          </p>
+    <!-------------------- Footer -------------------------------->
+    <!-- footer -->
+    <footer class="bg-light text-center text-lg-start ">
+        <div class="container p-5">
+            <div class="row d-flex justify-content-lg-between">
+                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                    <a class="text-decoration-none h5" style="color: #1b668c;" href="#">
+                        <img src="{{ url_for('static', filename='assets/logo1-removebg-preview.png') }}" alt="Logo"
+                            width="30" height="30" class="d-inline-block align-text-bottom">
+                        Growvest
+                    </a>
+                    <p>
+                        Bienvenue sur le site de la Public Benefit Corporation. Nous sommes une entreprise fière d'être
+                        un
+                        catalyseur du changement.
+                    </p>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase" style="color: #1b668c;">links</h5>
+                    <ul class="list-unstyled mb-0">
+                        <li class="">
+                            <a href="#!" class="text-dark" style="font-size: smaller;">Accueil</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-dark" style="font-size: smaller;">À propos de nous</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-dark" style="font-size: smaller;">Blog</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-dark" style="font-size: smaller;">Nous contacter</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-          <h5 class="text-uppercase" style="color: #1b668c;">links</h5>
-          <ul class="list-unstyled mb-0">
-            <li class="">
-              <a href="#!" class="text-dark" style="font-size: smaller;">Accueil</a>
-            </li>
-            <li>
-              <a href="#!" class="text-dark" style="font-size: smaller;">À propos de nous</a>
-            </li>
-            <li>
-              <a href="#!" class="text-dark" style="font-size: smaller;">Blog</a>
-            </li>
-            <li>
-              <a href="#!" class="text-dark" style="font-size: smaller;">Nous contacter</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <!-- <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-      © 2023 Public Benefit Corporation
-    </div>  -->
-  </footer>
-  <!--------------------End Footer -------------------------------->
+    </footer>
+    <!--------------------End Footer -------------------------------->
 
 
 </body>

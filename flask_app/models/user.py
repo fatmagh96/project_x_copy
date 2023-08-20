@@ -143,7 +143,7 @@ class User:
 
     # --- ADD MONEY TO WALLET (investor) ------
     @classmethod
-    def add_money_to_wallet(cls,data_dict):
+    def update_wallet(cls,data_dict):
         query = """
                     UPDATE users SET wallet = %(wallet)s WHERE id = %(id)s;
                 """

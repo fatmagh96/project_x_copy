@@ -18,82 +18,74 @@
 <body>
 
     <!----------------------- Nav Bar ---------------------------->
-    <nav class="navbar navbar-expand-lg nav_background py-2" data-bs-theme="dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">
-                <img src="{{ url_for('static', filename='assets/logo1-removebg-preview.png') }}" alt="Logo" width="30" height="30" class="d-inline-block align-text-bottom">
-                Growvest
-              </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarColor03">
-            <ul class="navbar-nav me-auto">
-              <li class="nav-item">
-                <a class="nav-link active" href="/">Home
-                  <span class="visually-hidden">(current)</span>
-                </a>
-              </li>
-              
-              <li class="nav-item">
-                <a class="nav-link" href="/explore">Explore</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Projects</a>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Separated link</a>
-                </div>
-              </li>
-            </ul>
-            <div class="me-5 ">
-                <form class="d-flex">
-                    <input type="text" id="searchInput" placeholder="Search..." class="bg-light text-black">
-                  <!-- <input class="form-control me-sm-2" type="search" placeholder="Search"> -->
-                  <!-- <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button> -->
-                </form>
-            </div>
-            <!-- Avatar -->
-            <div class="dropdown">
-              <a
-                class="dropdown-toggle d-flex align-items-center hidden-arrow"
-                href="#"
-                id="navbarDropdownMenuAvatar"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                  class="rounded-circle"
-                  height="30"
-                  alt="Black and White Portrait of a Man"
-                  loading="lazy"
-                />
-              </a>
-              <ul
-                class="dropdown-menu dropdown-menu-end"
-                aria-labelledby="navbarDropdownMenuAvatar"
-              >
-                <li>
-                  <a class="dropdown-item" href="#">My profile</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">Settings</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">Logout</a>
-                </li>
-              </ul>
-            </div>
-            <!-- end avatar -->
-          </div>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg nav_background py-2" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+        <img src="{{ url_for('static', filename='assets/logo1-removebg-preview.png') }}" alt="Logo" width="30"
+          height="30" class="d-inline-block align-text-bottom">
+        Growvest
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03"
+        aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarColor03">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="/">Home
+              <span class="visually-hidden">(current)</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/explore">Explore</a>
+          </li>
+
+        </ul>
+        <div class="me-5 ">
+          <form class="d-flex">
+            <input type="text" id="searchInput" placeholder="Search..." class="bg-light text-black">
+            <!-- <input class="form-control me-sm-2" type="search" placeholder="Search"> -->
+            <!-- <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button> -->
+          </form>
         </div>
-      </nav>
-    
+
+        {% if 'id' in session %}
+        <!-- Avatar -->
+        <div class="dropdown">
+          <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar"
+            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="{{ url_for('static', filename='assets/avatar.png') }}" class="rounded-circle" height="30"
+              alt="Black and White Portrait of a Man" loading="lazy" />
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+            <li>
+              <a class="dropdown-item" href="/dashboard">My profile</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Settings</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/logout">Logout</a>
+            </li>
+          </ul>
+        </div>
+        <!-- end avatar -->
+
+        {% else %}
+        <div class="d-flex gap-4">
+          <!-- data-bs-toggle="modal" data-bs-target="#SignInModal"  -->
+          <a href="/signin" class="btn text-light underline-on-hover shadow-none">Log in</a>
+          <a href="/register" class="btn text-light underline-on-hover shadow-none">Sign up</a>
+
+        </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </nav>
+  <!-- end navbar -->
     <!-----------------------End Nav Bar ---------------------------->
 
 

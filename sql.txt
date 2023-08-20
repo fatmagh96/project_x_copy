@@ -1,0 +1,57 @@
+SELECT * FROM project_x_db.users;
+
+SELECT * FROM users LEFT JOIN investments on  user_id = users.id LEFT JOIN 
+projects on project_id = projects.id WHERE project_id = 2;
+
+INSERT INTO users (first_name, last_name, email, password, type, wallet, image)
+VALUES
+('John', 'Doe', 'john@example.com', 'hashed_password', 'investor', '1000', 'image_url'),
+('Jane', 'Smith', 'jane@example.com', 'hashed_password', 'investor', '1500', 'image_url'),
+('Michael', 'Johnson', 'michael@example.com', 'hashed_password', 'investor', '2000', 'image_url'),
+('Emily', 'Brown', 'emily@example.com', 'hashed_password', 'investor', '800', 'image_url'),
+('William', 'Davis', 'william@example.com', 'hashed_password', 'investor', '500', 'image_url'),
+('Olivia', 'Miller', 'olivia@example.com', 'hashed_password', 'investor', '3000', 'image_url'),
+('James', 'Wilson', 'james@example.com', 'hashed_password', 'investor', '250', 'image_url'),
+('Ava', 'Moore', 'ava@example.com', 'hashed_password', 'investor', '1200', 'image_url'),
+('Liam', 'Anderson', 'liam@example.com', 'hashed_password', 'investor', '700', 'image_url'),
+('Sophia', 'Martinez', 'sophia@example.com', 'hashed_password', 'investor', '1800', 'image_url');
+
+INSERT INTO users (first_name, last_name, email, password, type, wallet, image)
+VALUES
+('Sarah', 'Williams', 'sarah@example.com', 'hashed_password', 'po', '0', 'image_url'),
+('David', 'Brown', 'david@example.com', 'hashed_password', 'po', '0', 'image_url'),
+('Emily', 'Taylor', 'emily@example.com', 'hashed_password', 'po', '0', 'image_url'),
+('Daniel', 'Johnson', 'daniel@example.com', 'hashed_password', 'po', '0', 'image_url'),
+('Olivia', 'Davis', 'olivia@example.com', 'hashed_password', 'po', '0', 'image_url'),
+('Liam', 'Miller', 'liam@example.com', 'hashed_password', 'po', '0', 'image_url'),
+('Sophia', 'Wilson', 'sophia@example.com', 'hashed_password', 'po', '0', 'image_url'),
+('Jackson', 'Moore', 'jackson@example.com', 'hashed_password', 'po', '0', 'image_url'),
+('Emma', 'Anderson', 'emma@example.com', 'hashed_password', 'po', '0', 'image_url'),
+('Noah', 'Garcia', 'noah@example.com', 'hashed_password', 'po', '0', 'image_url');
+
+
+
+-- Inserting B2C projects
+INSERT INTO projects (user_id, title, model, description, status, capital, goal, deadline,
+                      location, tax_code, website, acceptance_date, video)
+                      VALUES (1, 'Title A', 'b2b', 'Description A', 'accepted', 20000, 25000, '2023-09-30',
+     'Location X', 'TAX003', 'https://projectA.com', '2023-08-18', 'videoA.mp4'),
+    (2, 'Title B', 'b2b', 'Description B', 'accepted', 15000, 18000, '2023-10-15',
+     'Location Y', 'TAX004', 'https://projectB.com', '2023-08-18', 'videoB.mp4'),
+     (3, 'Title C', 'b2c', 'Description C', 'accepted', 30000, 35000, '2023-09-25',
+     'Location Z', 'TAX005', 'https://projectC.com', '2023-08-20', 'videoC.mp4'),
+    (4, 'Title D', 'b2c', 'Description D', 'accepted', 18000, 22000, '2023-10-10',
+     'Location W', 'TAX006', 'https://projectD.com', '2023-08-21', 'videoD.mp4');
+     
+SELECT * FROM projects;
+
+INSERT INTO investments (project_id, user_id, amount) VALUES
+(1,1,100), (1,2,100), (1,3,100), 
+(2,4,100), (2,5,100), (2,6,1000);
+
+INSERT INTO investments (project_id, user_id, amount) VALUES
+(2,1,200), (3,1,150);
+
+SELECT * FROM investments LEFT JOIN projects ON project_id = projects.id
+                    WHERE investments.user_id = 1;
+

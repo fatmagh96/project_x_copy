@@ -13,7 +13,6 @@
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
     crossorigin="anonymous"></script> -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <script src="{{ url_for('static', filename='script.js') }}"></script>
 
   <title>Document</title>
@@ -21,63 +20,10 @@
 
 <body>
 
-  <!--------------------------- Modal ------------------------->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="p-2 d-flex flex-row justify-content-end">
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="px-5 pt-2 pb-5 d-flex justify-content-center">
-              <h4>Login</h4>
-            </div>
-            <!-- Email input -->
-            <div class="form-outline mb-4">
-              <label class="form-label" for="form2Example1">Email address</label>
-              <input type="email" id="form2Example1" class="form-control" />
-            </div>
 
-            <!-- Password input -->
-            <div class="form-outline mb-4">
-              <label class="form-label" for="form2Example2">Password</label>
-              <input type="password" id="form2Example2" class="form-control" />
-            </div>
-
-            <!-- 2 column grid layout for inline styling -->
-            <div class="row mb-4">
-              <div class="col d-flex justify-content-center">
-                <!-- Checkbox -->
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
-                  <label class="form-check-label" for="form2Example31"> Remember me</label>
-                </div>
-              </div>
-
-              <div class="col">
-                <!-- Simple link -->
-                <a href="#!">Forgot password?</a>
-              </div>
-            </div>
-
-            <!-- Submit button -->
-            <div class="d-flex justify-content-center">
-              <button type="button" class="btn btn-primary btn-block mb-4 w-75">Sign in</button>
-            </div>
-
-            <!-- Register buttons -->
-            <div class="text-center">
-              <p>Not a member? <a href="/registration">Register</a></p>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!----------------------- End Modal -------------------------->
 
   <!--------------------------- NAVBAR ------------------------->
+  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg nav_background py-2" data-bs-theme="dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">
@@ -100,17 +46,7 @@
           <li class="nav-item">
             <a class="nav-link" href="/explore">Explore</a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-              aria-expanded="false">Projects</a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Separated link</a>
-            </div>
-          </li>
+
         </ul>
         <div class="me-5 ">
           <form class="d-flex">
@@ -120,16 +56,41 @@
           </form>
         </div>
 
+        {% if 'id' in session %}
+        <!-- Avatar -->
+        <div class="dropdown">
+          <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar"
+            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="{{ url_for('static', filename='assets/avatar.png') }}" class="rounded-circle" height="30"
+              alt="Black and White Portrait of a Man" loading="lazy" />
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+            <li>
+              <a class="dropdown-item" href="/dashboard">My profile</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Settings</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/logout">Logout</a>
+            </li>
+          </ul>
+        </div>
+        <!-- end avatar -->
+
+        {% else %}
         <div class="d-flex gap-4">
-          <a href="#" class="btn text-light underline-on-hover shadow-none" data-bs-toggle="modal"
-            data-bs-target="#exampleModal">Log in</a>
+          <!-- data-bs-toggle="modal" data-bs-target="#SignInModal"  -->
+          <a href="/signin" class="btn text-light underline-on-hover shadow-none">Log in</a>
           <a href="/register" class="btn text-light underline-on-hover shadow-none">Sign up</a>
 
         </div>
+        {% endif %}
 
       </div>
     </div>
   </nav>
+  <!-- end navbar -->
   <!--------------------------- END NAVBAR ------------------------->
 
 
@@ -142,27 +103,41 @@
             <div class="card my-4" style="border-radius: 15px;">
               <div class="card-body p-5">
                 <h2 class="text-uppercase text-center mb-5">Create Your Project</h2>
-                <form>
+                <form action="/projects/create" method="post">
                   <div class="form-outline mb-4">
                     <label class="form-label" for="form3Example1cg">Project Name</label>
-                    <input type="text" name="title" id="form3Example1cg" class="form-control form-control-lg" />
+                    <input type="text" name="title" id="form3Example1cg" class="form-control form-select-lg" />
                   </div>
                   <div class="form-outline mb-4">
-                    <label class="form-label" for="form3Example1cg">Short Description</label>
-                    <textarea name="" id="" cols="10" rows="2" class="form-control form-control-lg"></textarea>
+                    <label class="form-label" for="form3Example1cg">Description</label>
+                    <textarea name="description" id="" cols="10" rows="2" class="form-control"></textarea>
+                  </div>
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example1cg">Pitch</label>
+                    <textarea name="pitch" id="" cols="10" rows="2" class="form-control"></textarea>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example1cg">Project Video (.mp4)</label>
+                    <input type="file" name="video" accept=".mp4" id="form3Example1cg" class="form-control" />
+                  </div>
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example1cg">Project Image (JPG or PNG)</label>
+                    <input type="file" name="image" accept=".jpg, .jpeg, .png" id="form3Example1cg" class="form-control" />
                   </div>
 
                   <div class="form-outline mb-4">
                     <label class="form-label" for="form3Example3cg">Type</label>
-                    <select id="form3Example3cg" class="form-select form-select-lg" aria-label="Type">
+                    <select id="form3Example3cg" name="model" class="form-select" aria-label="Type">
                       <option value="" disabled selected>Select a Type</option>
-                      <option value="category1">B2B</option>
-                      <option value="category2">B2C</option>
+                      <option value="b2b">B2B</option>
+                      <option value="b2c">B2C</option>
                     </select>
                   </div>
                   <div class="form-outline mb-4">
                     <label class="form-label" for="form3Example3cg">Category</label>
-                    <select id="choices-multiple-remove-button" placeholder="Select upto 5 tags" multiple>
+                    <select id="choices-multiple-remove-button" name="category" placeholder="Select your Category">
+                      <option selected>Select your Category</option>
                       <option value="technology">Technology</option>
                       <option value="engineering">Engineering</option>
                       <option value="business">Business</option>
@@ -181,74 +156,44 @@
 
                   <div class="form-outline mb-4">
                     <label class="form-label" for="form3Example4cg">Amount Already Raised</label>
-                    <input type="number" id="form3Example4cg" class="form-control form-control-lg" />
+                    <input type="number" id="form3Example4cg" name="capital" class="form-control" min="0.1"
+                      step="0.1" />
                   </div>
 
                   <div class="form-outline mb-4">
                     <label class="form-label" for="form3Example4cdg">Funding Goal</label>
-                    <input type="number" id="form3Example4cdg" class="form-control form-control-lg" />
+                    <input type="number" id="form3Example4cdg" name="goal" class="form-control" min="0.1" step="0.1" />
                   </div>
 
                   <div class="form-outline mb-4">
                     <label class="form-label" for="form3Example1cg">Funding Deadline</label>
-                    <input type="Date" id="form3Example1cg" class="form-control form-control-lg" />
+                    <input type="Date" id="form3Example1cg" name="deadline" class="form-control" />
                   </div>
 
-                  <div class="form-outline mb-4">
-                    <label class="form-label" for="form3Example1cg">Project Location</label>
-                    <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
-                  </div>
-                  <div class="form-outline mb-4">
-                    <label class="form-label" for="form3Example1cg">Website</label>
-                    <input type="url" id="form3Example1cg" class="form-control form-control-lg" />
-                  </div>
                   <div class="form-outline mb-4">
                     <label class="form-label" for="form3Example1cg">Tax Code</label>
-                    <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
+                    <input type="text" id="form3Example1cg" name="tax_code" class="form-control" />
                   </div>
 
-                  <div class="form-outline mb-4">
-                    <label class="form-label">Already a Business Owner</label>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="business-owner" id="business-owner-yes"
-                        value="yes" />
-                      <label class="form-check-label" for="business-owner-yes">Yes</label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="business-owner" id="business-owner-no"
-                        value="no" />
-                      <label class="form-check-label" for="business-owner-no">No</label>
-                    </div>
-                  </div>
-                  <div class="form-outline mb-4" id="fieldExperience" style="display: none;">
-                    <label class="form-label" for="field">Field</label>
-                    <input type="text" id="field" class="form-control form-control-lg" />
-                  </div>
-                  <div class="form-outline mb-4" id="yearsExperience" style="display: none;">
-                    <label class="form-label" for="years">Years of Experience</label>
-                    <input type="number" id="years" class="form-control form-control-lg" />
-                  </div>
 
                   <div class="form-outline mb-4">
                     <label class="form-label" for="form3Example1cg">Bank details (RIB)</label>
-                    <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
+                    <input type="text" id="form3Example1cg" name="bank_details" class="form-control " />
                   </div>
 
                   <div class="form-outline mb-4">
-                    <label class="form-label" for="form3Example1cg">Upload Business Plan</label>
-                    <input type="file" id="form3Example1cg" class="form-control form-control-lg" />
+                    <label class="form-label" for="form3Example1cg">Upload Business Plan (.pdf)</label>
+                    <input type="file" id="form3Example1cg" name="business_plan" accept=".pdf" class="form-control" />
                   </div>
+                  <input type="hidden" value="pending" name="status">
+                  <input type="hidden" value="0" name="amount_raised">
 
-                  <div class="form-check d-flex justify-content-center mb-5">
-                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
-                    <label class="form-check-label" for="form2Example3g">
-                      I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
-                    </label>
-                  </div>
 
-                  <div class="d-flex justify-content-center">
-                    <button type="button" class="btn btn-block btn-lg gradient-custom-4"
-                      style="background-color: #023047; color: white;">Register</button>
+                  <div class="d-flex justify-content-center mt-5">
+                    <!-- <button type="button" class="btn btn-block btn-lg gradient-custom-4"
+                      style="background-color: #023047; color: white;">Register</button> -->
+                    <input type="submit" value="Register" class="btn btn-block btn-lg gradient-custom-4"
+                    style="background-color: #023047; color: white;">
                   </div>
                 </form>
               </div>
@@ -260,7 +205,7 @@
   </section>
 
 
-    <!-------------------- Footer -------------------------------->
+  <!-------------------- Footer -------------------------------->
   <!-- footer -->
   <footer class="bg-light text-center text-lg-start ">
     <div class="container p-5">
@@ -285,7 +230,7 @@
             <li>
               <a href="/explore" class="text-dark" style="font-size: smaller;">Explore</a>
             </li>
-            
+
           </ul>
         </div>
       </div>
@@ -312,14 +257,14 @@
 
   <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
   <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
   <script>
     $(document).ready(function () {
 
       var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
         removeItemButton: true,
-        maxItemCount: 5,
+        maxItemCount: 1,
         searchResultLimit: 5,
         renderChoiceLimit: 5
       });
@@ -327,7 +272,7 @@
 
     });
   </script>
-  
+
   <script>
 
     // ================== script of the prject form =====================

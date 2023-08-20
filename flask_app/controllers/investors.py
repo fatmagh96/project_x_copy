@@ -15,7 +15,7 @@ def investor_dashboard():
 
 
 @app.route('/add_money/<int:id>', methods=['POST'])
-def add_money_to_wallet(id):
+def update_wallet(id):
     print('moneeeeyy:', request.form)
     user = User.get_user_by_id({'id':id})
     if user.wallet:
@@ -24,14 +24,14 @@ def add_money_to_wallet(id):
             'wallet' : amount,
             'id' : id
         }
-        User.add_money_to_wallet(data)
+        User.update_wallet(data)
     else:
         amount = float(request.form['added_money'])
         data = {
             'wallet' : amount,
             'id' : id
         }
-        User.add_money_to_wallet(data)
+        User.update_wallet(data)
     return redirect('/investors/dashboard')
 
 # @app.route('/investors/dashboard/<tab_id>')

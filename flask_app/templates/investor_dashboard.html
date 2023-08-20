@@ -19,7 +19,8 @@
 </head>
 
 <body>
-  <!-- NAVBAR -->
+
+  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg nav_background py-2" data-bs-theme="dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">
@@ -42,17 +43,7 @@
           <li class="nav-item">
             <a class="nav-link" href="/explore">Explore</a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-              aria-expanded="false">Projects</a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Separated link</a>
-            </div>
-          </li>
+
         </ul>
         <div class="me-5 ">
           <form class="d-flex">
@@ -61,6 +52,8 @@
             <!-- <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button> -->
           </form>
         </div>
+
+        {% if 'id' in session %}
         <!-- Avatar -->
         <div class="dropdown">
           <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar"
@@ -70,10 +63,10 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
             <li>
-              <a class="dropdown-item" href="/investors/dashboard">My profile</a>
+              <a class="dropdown-item" href="/dashboard">My profile</a>
             </li>
             <li>
-              <a class="dropdown-item" href="/investors/dashboard#profile">Settings</a>
+              <a class="dropdown-item" href="#">Settings</a>
             </li>
             <li>
               <a class="dropdown-item" href="/logout">Logout</a>
@@ -81,10 +74,20 @@
           </ul>
         </div>
         <!-- end avatar -->
+
+        {% else %}
+        <div class="d-flex gap-4">
+          <!-- data-bs-toggle="modal" data-bs-target="#SignInModal"  -->
+          <a href="/signin" class="btn text-light underline-on-hover shadow-none">Log in</a>
+          <a href="/register" class="btn text-light underline-on-hover shadow-none">Sign up</a>
+
+        </div>
+        {% endif %}
+
       </div>
     </div>
   </nav>
-  <!-- end of nav bar -->
+  <!-- end navbar -->
 
   <!-- #80c886 -->
 
@@ -116,7 +119,7 @@
         </div>
       </div>
     </div>
-    <!-- Modal -->
+    <!-- WALLET Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">

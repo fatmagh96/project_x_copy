@@ -3,7 +3,7 @@ from flask import render_template, redirect
 
 # ! DONT FORGET TO IMPORT CONTROLLERS
 
-from flask_app.controllers import visitors, investors, admin_controller, project_owner_controller, users
+from flask_app.controllers import visitors, investors, admin_controller, users, projects
 
 
 

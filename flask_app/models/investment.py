@@ -26,24 +26,46 @@ class Investment:
         return connectToMySQL(DATABASE).query_db(query, data_dict)
     
     @classmethod
-    def get_all_investments_by_user_id(cls, data_dict):
+    def get_all_projects_invested_in_by_user_id(cls, data_dict):
         query = """
                     SELECT * FROM investments LEFT JOIN projects ON project_id = projects.id
                     WHERE user_id = %(user_id)s;
                 """
         result = connectToMySQL(DATABASE).query_db(query, data_dict)
         all_investments = []
-        for row in result:
-            investment = cls(row)
-            data = {
-                **row, 
-                'user_id': projects.user_id,
-                'created_at': projects.created_at,
-                'updated_at': projects.updated_at
-            }
-            investment.project = Project(data)
-            all_investments.append(investment)
-        return all_investments
+        if result:
+            for row in result:
+                investment = cls(row)
+                data = {
+                    **row, 
+                    'user_id': row['projects.user_id'],
+                    'created_at': row['projects.created_at'],
+                    'updated_at': row['projects.updated_at']
+                }
+                investment.project = Project(data)
+                all_investments.append(investment)
+            return all_investments
+        return False
+    
+    # @classmethod
+    # def get_all_investments_by_user_id(cls, data_dict):
+    #     query = """
+    #                 SELECT * FROM investments LEFT JOIN projects ON project_id = projects.id
+    #                 WHERE user_id = %(user_id)s;
+    #             """
+    #     result = connectToMySQL(DATABASE).query_db(query, data_dict)
+    #     all_investments = []
+    #     for row in result:
+    #         investment = cls(row)
+    #         data = {
+    #             **row, 
+    #             'user_id': projects.user_id,
+    #             'created_at': projects.created_at,
+    #             'updated_at': projects.updated_at
+    #         }
+    #         investment.project = Project(data)
+    #         all_investments.append(investment)
+    #     return all_investments
     
     @classmethod
     def get_all_investments_by_project_id(cls, data_dict):

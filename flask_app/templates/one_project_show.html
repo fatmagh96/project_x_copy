@@ -22,145 +22,89 @@
 
 <body>
 
-  <!--------------------------- Modal ------------------------->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="p-2 d-flex flex-row justify-content-end">
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="px-5 pt-2 pb-5 d-flex justify-content-center">
-              <h4>Login</h4>
-            </div>
-            <!-- Email input -->
-            <div class="form-outline mb-4">
-              <label class="form-label" for="form2Example1">Email address</label>
-              <input type="email" id="form2Example1" class="form-control" />
-            </div>
 
-            <!-- Password input -->
-            <div class="form-outline mb-4">
-              <label class="form-label" for="form2Example2">Password</label>
-              <input type="password" id="form2Example2" class="form-control" />
-            </div>
-
-            <!-- 2 column grid layout for inline styling -->
-            <div class="row mb-4">
-              <div class="col d-flex justify-content-center">
-                <!-- Checkbox -->
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
-                  <label class="form-check-label" for="form2Example31"> Remember me</label>
-                </div>
-              </div>
-
-              <div class="col">
-                <!-- Simple link -->
-                <a href="#!">Forgot password?</a>
-              </div>
-            </div>
-
-            <!-- Submit button -->
-            <div class="d-flex justify-content-center">
-              <button type="button" class="btn btn-primary btn-block mb-4 w-75">Sign in</button>
-            </div>
-
-            <!-- Register buttons -->
-            <div class="text-center">
-              <p>Not a member? <a href="/register">Register</a></p>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!----------------------- End Modal -------------------------->
 
   <!--------------------------- NAVBAR ------------------------->
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg nav_background py-2" data-bs-theme="dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">
-      <img src="{{ url_for('static', filename='assets/logo1-removebg-preview.png') }}" alt="Logo" width="30"
-        height="30" class="d-inline-block align-text-bottom">
-      Growvest
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03"
-      aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarColor03">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link active" href="/">Home
-            <span class="visually-hidden">(current)</span>
+  <nav class="navbar navbar-expand-lg nav_background py-2" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+        <img src="{{ url_for('static', filename='assets/logo1-removebg-preview.png') }}" alt="Logo" width="30"
+          height="30" class="d-inline-block align-text-bottom">
+        Growvest
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03"
+        aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarColor03">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="/">Home
+              <span class="visually-hidden">(current)</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/explore">Explore</a>
+          </li>
+
+        </ul>
+        <div class="me-5 ">
+          <form class="d-flex">
+            <input type="text" id="searchInput" placeholder="Search..." class="bg-light text-black">
+            <!-- <input class="form-control me-sm-2" type="search" placeholder="Search"> -->
+            <!-- <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button> -->
+          </form>
+        </div>
+
+        {% if 'id' in session %}
+        <!-- Avatar -->
+        <div class="dropdown">
+          <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar"
+            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="{{ url_for('static', filename='assets/avatar.png') }}" class="rounded-circle" height="30"
+              alt="Black and White Portrait of a Man" loading="lazy" />
           </a>
-        </li>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+            <li>
+              <a class="dropdown-item" href="/dashboard">My profile</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Settings</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/logout">Logout</a>
+            </li>
+          </ul>
+        </div>
+        <!-- end avatar -->
 
-        <li class="nav-item">
-          <a class="nav-link" href="/explore">Explore</a>
-        </li>
-        
-      </ul>
-      <div class="me-5 ">
-        <form class="d-flex">
-          <input type="text" id="searchInput" placeholder="Search..." class="bg-light text-black">
-          <!-- <input class="form-control me-sm-2" type="search" placeholder="Search"> -->
-          <!-- <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button> -->
-        </form>
-      </div>
+        {% else %}
+        <div class="d-flex gap-4">
+          <!-- data-bs-toggle="modal" data-bs-target="#SignInModal"  -->
+          <a href="/signin" class="btn text-light underline-on-hover shadow-none">Log in</a>
+          <a href="/register" class="btn text-light underline-on-hover shadow-none">Sign up</a>
 
-      {% if 'id' in session %}
-              <!-- Avatar -->
-              <div class="dropdown">
-                <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar"
-                  role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img src="{{ url_for('static', filename='assets/avatar.png') }}" class="rounded-circle" height="30"
-                    alt="Black and White Portrait of a Man" loading="lazy" />
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
-                  <li>
-                    <a class="dropdown-item" href="/investors/dashboard">My profile</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">Settings</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="/logout">Logout</a>
-                  </li>
-                </ul>
-              </div>
-              <!-- end avatar -->
-
-      {% else %}
-      <div class="d-flex gap-4">
-        <!-- data-bs-toggle="modal" data-bs-target="#SignInModal"  -->
-        <a href="/signin" class="btn text-light underline-on-hover shadow-none">Log in</a>
-        <a href="/register" class="btn text-light underline-on-hover shadow-none">Sign up</a>
+        </div>
+        {% endif %}
 
       </div>
-      {% endif %}
-
     </div>
-  </div>
-</nav>
-<!-- end navbar -->
+  </nav>
   <!--------------------------- END NAVBAR ------------------------->
 
 
   <!-- #80c886 -->
-  <div class="container mt-5 company-profile">
+  <div class="container mt-5 mb-5 company-profile">
     <!-- <h1 class="text-dark d-inline-block ms-3" style="vertical-align: middle;">My Wallet</h1> -->
     <div>
-      <h1 class="text-dark d-inline-block" style="vertical-align: middle;">Project Name </h1>
+      <h1 class="text-dark d-inline-block" style="vertical-align: middle;">{{project.title}}</h1>
     </div>
     <div class="row d-flex gap-5">
       <div class="col-8">
 
         <video controls width="100%">
-          <source src="{{ url_for('static', filename='assets/pexels-nathanael-schmer-14399457 (1080p).mp4') }}"
+          <source src="{{ url_for('static', filename='assets/'+project.video) }}"
             type="video/mp4">
           Your browser does not support the video tag.
         </video>
@@ -186,39 +130,9 @@
             <!-- Pitch -->
             <div class="tab-pane fade active show" id="pitch" role="tabpanel">
               <h3 class="my-4">Description</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat atque nulla ipsa, quia eveniet odio
-                modi possimus quidem laboriosam incidunt dolorem reprehenderit fuga dolores sunt eius dolorum! Dolorem,
-                iusto hic.
-
-                Omnis odio amet tempore numquam ex porro culpa explicabo enim, aspernatur rerum debitis dolore. Non
-                itaque voluptatem nemo, ipsam, consectetur soluta repellendus minus esse rerum ratione omnis, fuga
-                tempora quaerat?
-                Fugiat, fuga vero veritatis, qui similique saepe sit quos ipsa consequatur laudantium earum numquam
-                assumenda hic debitis officiis iste sapiente dolorum. Neque et non earum. Dolorum pariatur consectetur
-                quis modi?
-                Quasi veritatis ex beatae quo voluptate ea, aliquid incidunt debitis quia voluptas tempore eum, odit
-                error aliquam corporis enim laboriosam ab? Delectus nemo recusandae, cumque molestias voluptate quis
-                optio aliquam.
-                Temporibus corrupti expedita dolorem molestiae cupiditate, voluptatem repudiandae consequatur quia
-                quaerat doloremque enim exercitationem, officiis iste asperiores possimus consectetur ullam molestias
-                rem facere? Harum voluptatum molestias at quaerat sapiente accusamus!</p>
+              <p>{{project.description}}</p>
               <h3 class="my-4">Why Us?</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat atque nulla ipsa, quia eveniet odio
-                modi possimus quidem laboriosam incidunt dolorem reprehenderit fuga dolores sunt eius dolorum! Dolorem,
-                iusto hic.
-
-                Omnis odio amet tempore numquam ex porro culpa explicabo enim, aspernatur rerum debitis dolore. Non
-                itaque voluptatem nemo, ipsam, consectetur soluta repellendus minus esse rerum ratione omnis, fuga
-                tempora quaerat?
-                Fugiat, fuga vero veritatis, qui similique saepe sit quos ipsa consequatur laudantium earum numquam
-                assumenda hic debitis officiis iste sapiente dolorum. Neque et non earum. Dolorum pariatur consectetur
-                quis modi?
-                Quasi veritatis ex beatae quo voluptate ea, aliquid incidunt debitis quia voluptas tempore eum, odit
-                error aliquam corporis enim laboriosam ab? Delectus nemo recusandae, cumque molestias voluptate quis
-                optio aliquam.
-                Temporibus corrupti expedita dolorem molestiae cupiditate, voluptatem repudiandae consequatur quia
-                quaerat doloremque enim exercitationem, officiis iste asperiores possimus consectetur ullam molestias
-                rem facere? Harum voluptatum molestias at quaerat sapiente accusamus!</p>
+              <p>{{project.pitch}}</p>
             </div>
             <!-- end Pitch -->
             <!-- Our Team -->
@@ -317,37 +231,46 @@
         </div>
 
       </div>
-      <!-- side bar -->
+
+      <!-- -------SIDE BAR ---------- -->
       <div class="col-3 card" style="height: 25rem; position: sticky; top: 10px;">
         <div class="m-3">
-          <h2 class="my-4" style="letter-spacing: 1px;">100.5$</h2>
+          <h2 class="my-4" style="letter-spacing: 1px;">{{project.amount_raised}}$</h2>
           <span class="d-flex justify-content-between">
-            <span class="text-success">25%</span>
-            <span>100$/2000$</span>
+            <span class="text-success">{{percentage}}%</span>
+            <span>{{project.amount_raised}}$/{{project.goal}}$</span>
           </span>
           <div class="progress">
-            <div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25"
+            <div class="progress-bar bg-success" role="progressbar" style="width: {{percentage}}%;" aria-valuenow="25"
               aria-valuemin="0" aria-valuemax="100"></div>
           </div>
           <div class="mt-4">
             <h6>Goal:</h6>
-            <h5>2000$</h5>
+            <h5>{{project.goal}}$</h5>
           </div>
-          {% if 'id' in session %}
+          {% if 'id' in session and user.type == 'investor' %}
           <form action="#" method="post">
             <div class="row d-flex justify-content-between align-items-baseline">
+              {% for message in get_flashed_messages(category_filter=['investment_danger'])%}
+                    <p class="text-danger">{{message}}</p>
+              {%endfor%}
+              {% for message in get_flashed_messages(category_filter=['investment_success'])%}
+                    <p class="text-success">{{message}}</p>
+              {%endfor%}
               <div class="col">
                 <label for="" class="fs-6">Amount (TND):</label>
               </div>
               <div class="col">
-                <input type="number" id="float-number" name="amount" class="form-control mt-4 mb-1" step="0.1" placeholder="0">
+                <form action="/make_investment" method="post">
+                  <input type="number" id="float-number" name="amount" min="0.1" class="form-control mt-4 mb-1" step="0.1" placeholder="0">
+                </form>
               </div>
             </div>
             <input type="submit" value="Invest" class="btn btn-success w-100  mb-2">
           </form>
           {%else%}
           <div class="mt-5 mb-2">
-            <a href="#" class="btn btn-success w-100">Invest</a>
+            <a href="/signin" class="btn btn-success w-100">Invest</a>
           </div>
           {%endif%}
           <button class="wf-btn-o wf-btn-normal w-100 text-sm btn btn-outline-danger">

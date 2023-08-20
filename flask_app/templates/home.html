@@ -21,62 +21,6 @@
 
 <body>
 
-  <!--------------------------- Modal ------------------------->
-  <div class="modal fade" id="SignInModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="p-2 d-flex flex-row justify-content-end">
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form action="/login" method="post">
-            <div class="px-5 pt-2 pb-5 d-flex justify-content-center">
-              <h4>Login</h4>
-            </div>
-            <!-- Email input -->
-            <div class="form-outline mb-4">
-              <label class="form-label" for="form2Example1">Email address</label>
-              <input type="email" name="email" id="form2Example1" class="form-control" />
-            </div>
-
-            <!-- Password input -->
-            <div class="form-outline mb-4">
-              <label class="form-label" for="form2Example2">Password</label>
-              <input type="password" name="password" id="form2Example2" class="form-control" />
-            </div>
-
-            <!-- 2 column grid layout for inline styling -->
-            <div class="row mb-4">
-              <div class="col d-flex justify-content-center">
-                <!-- Checkbox -->
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
-                  <label class="form-check-label" for="form2Example31"> Remember me</label>
-                </div>
-              </div>
-
-              <div class="col">
-                <!-- Simple link -->
-                <a href="#!">Forgot password?</a>
-              </div>
-            </div>
-
-            <!-- Submit button -->
-            <div class="d-flex justify-content-center">
-                <input type="submit" value="Sign in" class="btn btn-primary btn-block mb-4 w-75">
-              <!-- <button type="button" class="btn btn-primary btn-block mb-4 w-75">Sign in</button> -->
-            </div>
-
-            <!-- Register buttons -->
-            <div class="text-center">
-              <p>Not a member? <a href="/register">Register</a></p>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!----------------------- End Modal -------------------------->
 
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg nav_background py-2" data-bs-theme="dark">
@@ -101,7 +45,7 @@
           <li class="nav-item">
             <a class="nav-link" href="/explore">Explore</a>
           </li>
-          
+
         </ul>
         <div class="me-5 ">
           <form class="d-flex">
@@ -112,26 +56,26 @@
         </div>
 
         {% if 'id' in session %}
-                <!-- Avatar -->
-                <div class="dropdown">
-                  <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar"
-                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ url_for('static', filename='assets/avatar.png') }}" class="rounded-circle" height="30"
-                      alt="Black and White Portrait of a Man" loading="lazy" />
-                  </a>
-                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
-                    <li>
-                      <a class="dropdown-item" href="/investors/dashboard">My profile</a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">Settings</a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="/logout">Logout</a>
-                    </li>
-                  </ul>
-                </div>
-                <!-- end avatar -->
+        <!-- Avatar -->
+        <div class="dropdown">
+          <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar"
+            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="{{ url_for('static', filename='assets/avatar.png') }}" class="rounded-circle" height="30"
+              alt="Black and White Portrait of a Man" loading="lazy" />
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+            <li>
+              <a class="dropdown-item" href="/dashboard">My profile</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Settings</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/logout">Logout</a>
+            </li>
+          </ul>
+        </div>
+        <!-- end avatar -->
 
         {% else %}
         <div class="d-flex gap-4">
@@ -414,7 +358,7 @@
         </div>
       </div>
     </div>
-    
+
     <hr class="pt-2">
 
     <div class="bg-gradient mt-5 mb-5">
@@ -431,8 +375,9 @@
           <div class="d-flex flex-column gap-3 max-w-lg mx-auto">
             <button class="btn btn-outline-secondary btn-sm text-sm rounded-lg hover-opacity-90">
               <span aria-hidden="true"
-                class="fa fa-envelope-o text-gray-500 h-[18px] text-[18px] absolute left-4 top-1/2 -translate-y-1/2"><a href="/signin" class="text-decoration-none text-dark">Connect with E-mail</a></span>
-              
+                class="fa fa-envelope-o text-gray-500 h-[18px] text-[18px] absolute left-4 top-1/2 -translate-y-1/2"><a
+                  href="/signin" class="text-decoration-none text-dark">Connect with E-mail</a></span>
+
             </button>
             <!-- <div class="d-none w-full max-w-lg mx-auto">
               <form class="d-flex flex-column gap-3">
@@ -455,7 +400,7 @@
   </main>
 
 
-    <!-------------------- Footer -------------------------------->
+  <!-------------------- Footer -------------------------------->
   <!-- footer -->
   <footer class="bg-light text-center text-lg-start ">
     <div class="container p-5">
@@ -480,7 +425,7 @@
             <li>
               <a href="/explore" class="text-dark" style="font-size: smaller;">Explore</a>
             </li>
-            
+
           </ul>
         </div>
       </div>
@@ -494,15 +439,15 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.5.2/js/bootstrap.bundle.min.js"></script>
   <script>
-      document.addEventListener('DOMContentLoaded', function () {
-          var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
-  
-          // Check if the "open_modal" query parameter is present in the URL
-          const urlParams = new URLSearchParams(window.location.search);
-          if (urlParams.has('open_modal')) {
-              myModal.show();
-          }
-      });
+    document.addEventListener('DOMContentLoaded', function () {
+      var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+
+      // Check if the "open_modal" query parameter is present in the URL
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.has('open_modal')) {
+        myModal.show();
+      }
+    });
   </script>
 
 </body>

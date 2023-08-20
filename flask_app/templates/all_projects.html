@@ -20,61 +20,6 @@
 </head>
 
 <body>
-  <!--------------------------- Modal ------------------------->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="p-2 d-flex flex-row justify-content-end">
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="px-5 pt-2 pb-5 d-flex justify-content-center">
-              <h4>Login</h4>
-            </div>
-            <!-- Email input -->
-            <div class="form-outline mb-4">
-              <label class="form-label" for="form2Example1">Email address</label>
-              <input type="email" id="form2Example1" class="form-control" />
-            </div>
-
-            <!-- Password input -->
-            <div class="form-outline mb-4">
-              <label class="form-label" for="form2Example2">Password</label>
-              <input type="password" id="form2Example2" class="form-control" />
-            </div>
-
-            <!-- 2 column grid layout for inline styling -->
-            <div class="row mb-4">
-              <div class="col d-flex justify-content-center">
-                <!-- Checkbox -->
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
-                  <label class="form-check-label" for="form2Example31"> Remember me</label>
-                </div>
-              </div>
-
-              <div class="col">
-                <!-- Simple link -->
-                <a href="#!">Forgot password?</a>
-              </div>
-            </div>
-
-            <!-- Submit button -->
-            <div class="d-flex justify-content-center">
-              <button type="button" class="btn btn-primary btn-block mb-4 w-75">Sign in</button>
-            </div>
-
-            <!-- Register buttons -->
-            <div class="text-center">
-              <p>Not a member? <a href="/registration">Register</a></p>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!----------------------- End Modal -------------------------->
 
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg nav_background py-2" data-bs-theme="dark">
@@ -99,7 +44,7 @@
           <li class="nav-item">
             <a class="nav-link" href="/explore">Explore</a>
           </li>
-          
+
         </ul>
         <div class="me-5 ">
           <form class="d-flex">
@@ -110,26 +55,26 @@
         </div>
 
         {% if 'id' in session %}
-                <!-- Avatar -->
-                <div class="dropdown">
-                  <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar"
-                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ url_for('static', filename='assets/avatar.png') }}" class="rounded-circle" height="30"
-                      alt="Black and White Portrait of a Man" loading="lazy" />
-                  </a>
-                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
-                    <li>
-                      <a class="dropdown-item" href="/investors/dashboard">My profile</a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">Settings</a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="/logout">Logout</a>
-                    </li>
-                  </ul>
-                </div>
-                <!-- end avatar -->
+        <!-- Avatar -->
+        <div class="dropdown">
+          <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar"
+            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="{{ url_for('static', filename='assets/avatar.png') }}" class="rounded-circle" height="30"
+              alt="Black and White Portrait of a Man" loading="lazy" />
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+            <li>
+              <a class="dropdown-item" href="/dashboard">My profile</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Settings</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/logout">Logout</a>
+            </li>
+          </ul>
+        </div>
+        <!-- end avatar -->
 
         {% else %}
         <div class="d-flex gap-4">
@@ -146,9 +91,9 @@
   <!-- end navbar -->
 
 
-  <main class="explore-projects">
+  <main class="explore-projects container">
 
-    <div class="d-flex justify-content-end p-5 ">
+    <!-- <div class="d-flex justify-content-end p-5 ">
       <div class="me-4">
         <select class="form-select" aria-label="Default select example">
           <option selected>Categories</option>
@@ -165,33 +110,38 @@
           <option value="3">Three</option>
         </select>
       </div>
-    </div>
+    </div> -->
+    <h1 class="mt-5 mb-5 ms-5">All Projects</h1>
 
 
     <div class="page-content">
-      <div class="card" style="background-image: url('../static/assets/companies/robots.jpg');">
+      {% for project in projects%}
+
+      <div class="card col-3" style="background-image: url('../static/assets/{{project.image}}'); background-size: cover;">
         <div class="content">
-          <h2 class="title">Beyond Imagination</h2>
-          <p class="copy">Beyond ChatGPT - AI Brain for work </p>
-          <button class="btncard"><a href="/projects/id/show" class="text-decoration-none text-light">View
+          <h2 class="title">{{project.title}}</h2>
+          <!-- <p class="copy">Beyond ChatGPT - AI Brain for work </p> -->
+          <button class="btncard"><a href="/projects/{{project.id}}/show" class="text-decoration-none text-light">View
               Project</a></button>
         </div>
       </div>
-      <div class="card" style="background-image: url('../static/assets/companies/moto.jpg');">
+
+      {% endfor %}
+      <!-- <div class="card col-3" style="background-image: url('../static/assets/companies/moto.jpg');">
         <div class="content">
           <h2 class="title">Curtiss Motorcycle</h2>
           <p class="copy">Iconic Electric Motorcycles</p>
           <button class="btncard">Details</button>
         </div>
       </div>
-      <div class="card" style="background-image: url('../static/assets/companies/spinn.webp');">
+      <div class="card col-3" style="background-image: url('../static/assets/companies/spinn.webp');">
         <div class="content">
           <h2 class="title">Spinn</h2>
           <p class="copy">Building the future of coffee</p>
           <button class="btncard">Details</button>
         </div>
       </div>
-      <div class="card" style="background-image: url('../static/assets/companies/volup.jpg');">
+      <div class="card col-3" style="background-image: url('../static/assets/companies/volup.jpg');">
         <div class="content">
           <h2 class="title">Volup</h2>
           <p class="copy">Bringing the hight-end food industry to you</p>
@@ -199,10 +149,10 @@
 
         </div>
       </div>
-    </div>
-    <br>
-    <div class="page-content">
-      <div class="card" style="background-image: url('../static/assets/companies/zennihome.jpg');">
+    
+
+    
+      <div class="card col-3" style="background-image: url('../static/assets/companies/zennihome.jpg');">
         <div class="content">
           <h2 class="title">Zennihome</h2>
           <p class="copy">ZenniHome is transforming the housing industry with beautiful homes that are built on a
@@ -210,7 +160,7 @@
           <button class="btncard">Details</button>
         </div>
       </div>
-      <div class="card">
+      <div class="card col-3">
         <div class="card" style="background-image: url('../static/assets/companies/smartvid.jpg');">
           <div class="content">
             <h2 class="title">Smart_Video</h2>
@@ -219,51 +169,51 @@
           </div>
         </div>
       </div>
-      <div class="card">
+      <div class="card col-3">
         <div class="content">
           <h2 class="title">404 Not Found</h2>
           <p class="copy">Not yet</p>
           <button class="btncard">Details</button>
         </div>
       </div>
-      <div class="card">
+      <div class="card col-3">
         <div class="content">
           <h2 class="title">404 Not Found</h2>
           <p class="copy">Not yet</p>
           <button class="btncard">Details</button>
         </div>
       </div>
-    </div>
-    <br>
-    <div class="page-content">
-      <div class="card">
+    
+
+    
+      <div class="card col-3">
         <div class="content">
           <h2 class="title">404 Not Found</h2>
           <p class="copy">Not yet</p>
           <button class="btncard">Details</button>
         </div>
       </div>
-      <div class="card">
+      <div class="card col-3">
         <div class="content">
           <h2 class="title">404 Not Found</h2>
           <p class="copy">Not yet</p>
           <button class="btncard">Details</button>
         </div>
       </div>
-      <div class="card">
+      <div class="card col-3">
         <div class="content">
           <h2 class="title">404 Not Found</h2>
           <p class="copy">Not yet</p>
           <button class="btncard">Details</button>
         </div>
       </div>
-      <div class="card">
+      <div class="card col-3">
         <div class="content">
           <h2 class="title">404 Not Found</h2>
           <p class="copy">Not yet</p>
           <button class="btncard">Details</button>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <div aria-label="Page navigation ">

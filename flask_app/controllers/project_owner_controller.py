@@ -9,7 +9,7 @@ def po_dashboard_accepted():
 def po_dashboard_cyp():
     return render_template('dashboard_po_CYP.html')
 
-@app.route('/project/dashboard/pending')
+@app.route('/projects/dashboard/pending')
 def po_dashboard_pending():
     return render_template('dashboard_po_Pending.html')
 
