@@ -18,7 +18,7 @@ def create():
         print(pw_hashed)
         data = {
             **request.form,
-            'password': pw_hashed,
+            'password': pw_hashed
         }
         user_id = User.create_user(data)
         session['id'] = user_id
@@ -29,17 +29,24 @@ def create():
         
     return redirect('/register')
 
+@app.route('/signin')
+def signin():
+    return render_template('login.html')
+
 @app.route('/login', methods = ['POST'])
 def login():
     # print(request.form)
     if User.login_validation(request.form):
-        session['id'] = User.get_user_by_email(request.form).id
-        if User.type == 'investor':
+        user = User.get_user_by_email(request.form)
+        print('💲'*5,user.wallet,'💲'*5)
+        session['id'] = user.id
+        if user.type == 'investor':
             return redirect('/investors/dashboard')
-        if User.type == 'po':
+        if user.type == 'po':
             return redirect('/project/dashboard/cyp')
-        if User.type == 'admin':
+        if user.type == 'admin':
             return redirect('/admin/dashboard')
-    return redirect('/')
+    # message = "email invalid"
+    return redirect('/signin')
 
 

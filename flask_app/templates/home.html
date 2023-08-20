@@ -22,27 +22,27 @@
 <body>
 
   <!--------------------------- Modal ------------------------->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="SignInModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="p-2 d-flex flex-row justify-content-end">
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form>
+          <form action="/login" method="post">
             <div class="px-5 pt-2 pb-5 d-flex justify-content-center">
               <h4>Login</h4>
             </div>
             <!-- Email input -->
             <div class="form-outline mb-4">
               <label class="form-label" for="form2Example1">Email address</label>
-              <input type="email" id="form2Example1" class="form-control" />
+              <input type="email" name="email" id="form2Example1" class="form-control" />
             </div>
 
             <!-- Password input -->
             <div class="form-outline mb-4">
               <label class="form-label" for="form2Example2">Password</label>
-              <input type="password" id="form2Example2" class="form-control" />
+              <input type="password" name="password" id="form2Example2" class="form-control" />
             </div>
 
             <!-- 2 column grid layout for inline styling -->
@@ -63,12 +63,13 @@
 
             <!-- Submit button -->
             <div class="d-flex justify-content-center">
-              <button type="button" class="btn btn-primary btn-block mb-4 w-75">Sign in</button>
+                <input type="submit" value="Sign in" class="btn btn-primary btn-block mb-4 w-75">
+              <!-- <button type="button" class="btn btn-primary btn-block mb-4 w-75">Sign in</button> -->
             </div>
 
             <!-- Register buttons -->
             <div class="text-center">
-              <p>Not a member? <a href="/registration">Register</a></p>
+              <p>Not a member? <a href="/register">Register</a></p>
             </div>
           </form>
         </div>
@@ -100,17 +101,7 @@
           <li class="nav-item">
             <a class="nav-link" href="/explore">Explore</a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-              aria-expanded="false">Projects</a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Separated link</a>
-            </div>
-          </li>
+          
         </ul>
         <div class="me-5 ">
           <form class="d-flex">
@@ -120,11 +111,36 @@
           </form>
         </div>
 
+        {% if 'id' in session %}
+                <!-- Avatar -->
+                <div class="dropdown">
+                  <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar"
+                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="{{ url_for('static', filename='assets/avatar.png') }}" class="rounded-circle" height="30"
+                      alt="Black and White Portrait of a Man" loading="lazy" />
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                    <li>
+                      <a class="dropdown-item" href="/investors/dashboard">My profile</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Settings</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="/logout">Logout</a>
+                    </li>
+                  </ul>
+                </div>
+                <!-- end avatar -->
+
+        {% else %}
         <div class="d-flex gap-4">
-          <a href="#" class="btn text-light underline-on-hover shadow-none" data-bs-toggle="modal" data-bs-target="#exampleModal">Log in</a>
+          <!-- data-bs-toggle="modal" data-bs-target="#SignInModal"  -->
+          <a href="/signin" class="btn text-light underline-on-hover shadow-none">Log in</a>
           <a href="/register" class="btn text-light underline-on-hover shadow-none">Sign up</a>
 
         </div>
+        {% endif %}
 
       </div>
     </div>
@@ -143,7 +159,7 @@
               <div class="col-lg-6 align-self-center">
                 <div class="owl-carousel owl-banner">
                   <div class="item header-text">
-                    <h6>Welcome to Planet X</h6>
+                    <h6>Welcome to Growvest</h6>
                     <h2>Invest <em>in the founders</em> who are building <span>the future</span></h2>
                     <p>Get shares and preferred seats of the startups and small businesses you love from just 100$</p>
 
@@ -398,8 +414,10 @@
         </div>
       </div>
     </div>
+    
+    <hr class="pt-2">
 
-    <div class="bg-gradient mt-5">
+    <div class="bg-gradient mt-5 mb-5">
       <div class="px-2 xs:px-6 pt-16 lg:pt-20 bg-white/80">
         <div class="container max-w-4xl mx-auto space-y-2 text-center ">
           <h2 class="text-[#292524] text-2xl md:text-3xl lg:text-5xl lg:leading-tight lg:font-light">
@@ -413,10 +431,10 @@
           <div class="d-flex flex-column gap-3 max-w-lg mx-auto">
             <button class="btn btn-outline-secondary btn-sm text-sm rounded-lg hover-opacity-90">
               <span aria-hidden="true"
-                class="fa fa-envelope-o text-gray-500 h-[18px] text-[18px] absolute left-4 top-1/2 -translate-y-1/2"></span>
-              Connect with E-mail
+                class="fa fa-envelope-o text-gray-500 h-[18px] text-[18px] absolute left-4 top-1/2 -translate-y-1/2"><a href="/signin" class="text-decoration-none text-dark">Connect with E-mail</a></span>
+              
             </button>
-            <div class="d-none w-full max-w-lg mx-auto">
+            <!-- <div class="d-none w-full max-w-lg mx-auto">
               <form class="d-flex flex-column gap-3">
                 <label for="email" class="visually-hidden">E-mail</label>
                 <div class="makena wf-input-container">
@@ -427,14 +445,13 @@
                 </div>
                 <button type="submit" class="btn btn-primary btn-sm">Continue</button>
               </form>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
     </div>
     <br>
 
-    <hr class="mb-6 pt-5">
   </main>
 
 
@@ -451,25 +468,19 @@
           </a>
           <!-- <h5 class="text-uppercase" style="color: #1b668c;">Project X</h5> -->
           <p>
-            Bienvenue sur le site de la Public Benefit Corporation. Nous sommes une entreprise fière d'être un
-            catalyseur du changement.
+            Welcome to the Public Benefit Corporation's website. We are a company proud to be a catalyst for change.
           </p>
         </div>
         <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
           <h5 class="text-uppercase" style="color: #1b668c;">links</h5>
           <ul class="list-unstyled mb-0">
             <li class="">
-              <a href="#!" class="text-dark" style="font-size: smaller;">Accueil</a>
+              <a href="/" class="text-dark" style="font-size: smaller;">Home</a>
             </li>
             <li>
-              <a href="#!" class="text-dark" style="font-size: smaller;">À propos de nous</a>
+              <a href="/explore" class="text-dark" style="font-size: smaller;">Explore</a>
             </li>
-            <li>
-              <a href="#!" class="text-dark" style="font-size: smaller;">Blog</a>
-            </li>
-            <li>
-              <a href="#!" class="text-dark" style="font-size: smaller;">Nous contacter</a>
-            </li>
+            
           </ul>
         </div>
       </div>
@@ -493,7 +504,6 @@
           }
       });
   </script>
-
 
 </body>
 

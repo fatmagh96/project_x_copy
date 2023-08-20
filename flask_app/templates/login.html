@@ -22,62 +22,6 @@
 
 <body>
 
-  <!--------------------------- Modal ------------------------->
-  <div class="modal fade" id="SignInModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="p-2 d-flex flex-row justify-content-end">
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form action="/login" method="post">
-            <div class="px-5 pt-2 pb-5 d-flex justify-content-center">
-              <h4>Login</h4>
-            </div>
-            <!-- Email input -->
-            <div class="form-outline mb-4">
-              <label class="form-label" for="form2Example1">Email address</label>
-              <input type="email" name="email" id="form2Example1" class="form-control" />
-            </div>
-
-            <!-- Password input -->
-            <div class="form-outline mb-4">
-              <label class="form-label" for="form2Example2">Password</label>
-              <input type="password" name="password" id="form2Example2" class="form-control" />
-            </div>
-
-            <!-- 2 column grid layout for inline styling -->
-            <div class="row mb-4">
-              <div class="col d-flex justify-content-center">
-                <!-- Checkbox -->
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
-                  <label class="form-check-label" for="form2Example31"> Remember me</label>
-                </div>
-              </div>
-
-              <div class="col">
-                <!-- Simple link -->
-                <a href="#!">Forgot password?</a>
-              </div>
-            </div>
-
-            <!-- Submit button -->
-            <div class="d-flex justify-content-center">
-                <input type="submit" value="Sign in" class="btn btn-primary btn-block mb-4 w-75">
-              <!-- <button type="button" class="btn btn-primary btn-block mb-4 w-75">Sign in</button> -->
-            </div>
-
-            <!-- Register buttons -->
-            <div class="text-center">
-              <p>Not a member? <a href="/register">Register</a></p>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!----------------------- End Modal -------------------------->
 
   <!--------------------------- NAVBAR ------------------------->
   <!-- Navbar -->
@@ -103,7 +47,7 @@
           <li class="nav-item">
             <a class="nav-link" href="/explore">Explore</a>
           </li>
-          
+
         </ul>
         <div class="me-5 ">
           <form class="d-flex">
@@ -159,77 +103,43 @@
           <div class="col-12 col-md-9 col-lg-7 col-xl-6">
             <div class="card my-4" style="border-radius: 15px;">
               <div class="card-body p-5">
-                <h2 class="text-uppercase text-center mb-5" style="color: gray;">Create an account</h2>
-
-                <form action="/users/create" method="post">
-
-                  <div class="form-outline mb-4">
-                    <label class="form-label" for="form3Example0cg">Your First Name</label>
-                    {% for message in get_flashed_messages(category_filter=['first_name'])%}
-                      <p class="text-danger">{{message}}</p>
+                
+                <div class="px-5 pt-2 pb-5 d-flex justify-content-center">
+                    <h4>Login</h4>
+                </div>
+                <form action="/login" method="post">
+                    
+                    {%for message in get_flashed_messages(category_filter=['login'])%}
+                        <p class="text-danger">{{message}}</p>
                     {%endfor%}
-                    <input type="text" name="first_name" id="form3Example0cg" class="form-control form-control-lg" />
-                  </div>
-                  <div class="form-outline mb-4">
-                    <label class="form-label" for="form3Example1cg">Your Last Name</label>
-                    {% for message in get_flashed_messages(category_filter=['last_name'])%}
-                      <p class="text-danger">{{message}}</p>
-                    {%endfor%}
-                    <input type="text" name="last_name" id="form3Example1cg" class="form-control form-control-lg" />
-                  </div>
-
-                  <div class="form-outline mb-4">
-                    <label class="form-label" for="form3Example3cg">Your Email</label>
-                    {% for message in get_flashed_messages(category_filter=['email'])%}
-                      <p class="text-danger">{{message}}</p>
-                    {%endfor%}
-                    <input type="email" name="email" id="form3Example3cg" class="form-control form-control-lg" />
-                  </div>
-
-                  <div class="form-outline mb-4">
-                    <label class="form-label" for="form3Example4cg">Password</label>
-                    {% for message in get_flashed_messages(category_filter=['password'])%}
-                      <p class="text-danger">{{message}}</p>
-                    {%endfor%}
-                    <input type="password" name="password" id="form3Example4cg" class="form-control form-control-lg" />
-                  </div>
-
-                  <div class="form-outline mb-4">
-                    <label class="form-label" for="form3Example4cdg">Repeat your password</label>
-                    <input type="password" name="confirm_password" id="form3Example4cdg"
-                      class="form-control form-control-lg" />
-                  </div>
-
-                  <div class="form-outline mb-4">
-                    <label class="form-label" for="form3Example4cdg">Are You a</label>
-                    <!-- <input type="password" id="form3Example4cdg" class="form-control form-control-lg" /> -->
-                    <!-- <label for="">Gender:</label> -->
-                    <div class="form-check d-flex gap-5 mb-5">
-                      <div>
-                        <input type="radio" name="type" value="po" id="PO" checked>
-                        <label for="PO" class="me-2">Project Owner</label>
-                      </div>
-                      <div>
-                        <input type="radio" name="type" value="investor" id="Investor">
-                        <label for="Investor" class="me-2">Investor</label>
-                      </div>
-
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="form2Example1">Email address</label>
+                      <input type="email" name="email" id="form2Example1" class="form-control" />
                     </div>
-                  </div>
+        
+                    <!-- Password input -->
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="form2Example2">Password</label>
+                      <input type="password" name="password" id="form2Example2" class="form-control" />
+                    </div>
+        
+                    <!-- 2 column grid layout for inline styling -->
 
-                  <!-- #023047 -->
-                  <div class="d-flex justify-content-center mt-4">
-                    <!-- <button type="button" class="btn btn-block btn-lg gradient-custom-4"
-                      style="background-color:#02174c ; color: white;">Register</button> -->
-                      <input type="submit" value="Register" class="btn btn-block btn-lg gradient-custom-4"
-                      style="background-color:#02174c ; color: white;">
-                  </div>
-
-                  <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="/signin"
-                      class="fw-bold text-body"><u>Login
-                        here</u></a></p>
-
+        
+                    <!-- Submit button -->
+                    <div class="d-flex justify-content-center ">
+                        <input type="submit" value="Sign in" class="btn btn-block mt-4 mb-4" style="background-color:#02174c ; color: white;">
+                      <!-- <button type="button" class="btn btn-primary btn-block mb-4 w-75">Sign in</button> -->
+                    </div>
                 </form>
+        
+                    <!-- Register buttons -->
+                    <div class="text-center mt-4">
+                        <p class="text-center text-muted mt-5 mb-0">Not a member? <a href="/register"
+                            class="fw-bold text-body text-decoration-underline">Register</a></p>
+                      <!-- <p>Not a member? <a href="/register">Register</a></p> -->
+                    </div>
 
               </div>
             </div>
@@ -275,7 +185,6 @@
     </div>  -->
   </footer>
   <!--------------------End Footer -------------------------------->
-
 
 
 </body>

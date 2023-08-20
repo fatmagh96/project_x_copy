@@ -101,7 +101,7 @@ class User:
     @classmethod
     def update_password(cls, data_dict):
         query = """
-                UPDATE users SET password = %(password)s
+                UPDATE users SET password = %(new_password)s
                 WHERE id = %(id)s;
                 """
         result = connectToMySQL(DATABASE).query_db(query, data_dict)
@@ -113,6 +113,14 @@ class User:
     def add_to_favourites(cls, data_dict):
         query = """ INSERT INTO favourites (project_id, user_id)
                     VALUES (%(project_id)s, %(user_id)s);
+                     """
+        result = connectToMySQL(DATABASE).query_db(query, data_dict)
+        return result
+    
+    @classmethod
+    def remove_from_favourites(cls, data_dict):
+        query = """ DELETE FROM favourites
+                    WHERE id = %(id)s;
                      """
         result = connectToMySQL(DATABASE).query_db(query, data_dict)
         return result
@@ -133,12 +141,38 @@ class User:
     # ----- ADMIN -----
 
 
+    # --- ADD MONEY TO WALLET (investor) ------
+    @classmethod
+    def add_money_to_wallet(cls,data_dict):
+        query = """
+                    UPDATE users SET wallet = %(wallet)s WHERE id = %(id)s;
+                """
+        return connectToMySQL(DATABASE).query_db(query, data_dict)
+
     
 
 
 
 
+    # --------- VALIDATION -----------
 
+    @staticmethod
+    def change_password_validation(data_dict):
+        is_valid = True
+        user = User.get_user_by_id(data_dict)
+        if not bcrypt.check_password_hash(user.password, data_dict['current_password']):
+            flash("current password is wrong!" , "change_password")
+            is_valid =False
+        elif bcrypt.check_password_hash(user.password, data_dict['new_password']):
+            flash("new password must be different from current password!" , "change_password")
+            is_valid =False
+        elif len(data_dict['new_password'])<8:
+            flash("Password must be at least 8 characters", "change_password")
+            is_valid = False
+        elif data_dict['new_password'] != data_dict['confirm_new_password']:
+            flash("Password and Confirm password dont match","change_password")
+            is_valid = False
+        return is_valid
 
     @staticmethod
     def login_validation(data_dict):
@@ -146,9 +180,11 @@ class User:
         user = User.get_user_by_email(data_dict)
         if not user:
             flash("Email or Password invalid !!",'login')
+            print('Email or Password invalid !!')
             is_valid = False
         elif not bcrypt.check_password_hash(user.password, data_dict['password']):
             flash("Email or Password invalid !!",'login')
+            print('Email or Password invalid !!')
             is_valid = False
         return is_valid
     
@@ -185,6 +221,16 @@ class User:
             flash("Password and Confirm password dont match","password")
             is_valid = False
 
-        
+        return is_valid
+    
 
+    @staticmethod
+    def validate_edit(data_dict):
+        is_valid = True
+        if len(data_dict['first_name']) < 2:
+            flash("First name too short!","first_name")
+            is_valid = False
+        if len(data_dict['last_name']) < 2:
+            flash("Last name too short!","last_name")
+            is_valid = False
         return is_valid
