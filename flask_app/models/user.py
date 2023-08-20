@@ -76,7 +76,10 @@ class User:
     def get_user_by_id(cls,data_dict):
         query = "SELECT * FROM users WHERE id = %(id)s;"
         result = connectToMySQL(DATABASE).query_db(query,data_dict)
-        return cls(result[0])
+        if result:
+            return cls(result[0])
+        else:
+            return False   
     
     @classmethod
     def get_user_by_email(cls,data_dict):
