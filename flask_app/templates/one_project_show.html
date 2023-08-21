@@ -233,12 +233,12 @@
       </div>
 
       <!-- -------SIDE BAR ---------- -->
-      <div class="col-3 card" style="height: 25rem; position: sticky; top: 10px;">
+      <div class="col-3 card" style="height: 27rem; position: sticky; top: 10px;">
         <div class="m-3">
-          <h2 class="my-4" style="letter-spacing: 1px;">{{project.amount_raised}}$</h2>
+          <h2 class="my-4" style="letter-spacing: 1px;">{{total}}$</h2>
           <span class="d-flex justify-content-between">
             <span class="text-success">{{percentage}}%</span>
-            <span>{{project.amount_raised}}$/{{project.goal}}$</span>
+            <span>{{total}}$/{{project.goal}}$</span>
           </span>
           <div class="progress">
             <div class="progress-bar bg-success" role="progressbar" style="width: {{percentage}}%;" aria-valuenow="25"
@@ -246,7 +246,11 @@
           </div>
           <div class="mt-4">
             <h6>Goal:</h6>
-            <h5>{{project.goal}}$</h5>
+            <h6>{{project.goal}}$</h6>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <h6>Time Left:</h6>
+            <h6>{{time_left.months}} months {{time_left.days}} days</h6>
           </div>
           {% if 'id' in session %}
             {% if user.type == 'investor' %}
@@ -267,16 +271,16 @@
                     </form>
                   </div>
                 </div>
-                <input type="submit" value="Invest" class="btn btn-success w-100  mb-2">
+                <input type="submit" value="Invest" class="btn btn-success w-100  ">
               </form>
             {%endif%}
-          {%else%}
+         
           <div class="mt-5 mb-2">
             <a href="/signin" class="btn btn-success w-100">Invest</a>
           </div>
           {%endif%}
           
-          <button class="wf-btn-o wf-btn-normal w-100 text-sm btn btn-outline-danger">
+          <button class="wf-btn-o wf-btn-normal w-100 text-sm btn btn-outline-danger mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill"
               viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />

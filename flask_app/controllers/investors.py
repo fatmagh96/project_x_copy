@@ -11,6 +11,8 @@ def investor_dashboard():
     if 'id' not in session:
         return redirect('/')
     user = User.get_user_by_id({'id':session['id']})
+    if user.type != 'investor':
+        return redirect('/')
     return render_template('investor_dashboard.html', user=user)
 
 

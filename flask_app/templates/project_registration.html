@@ -106,28 +106,46 @@
                 <form action="/projects/create" method="post">
                   <div class="form-outline mb-4">
                     <label class="form-label" for="form3Example1cg">Project Name</label>
+                    {% for message in get_flashed_messages(category_filter=['title']) %}
+                            <p class="h6 text-danger">* {{message}}</p>
+                    {% endfor %}
                     <input type="text" name="title" id="form3Example1cg" class="form-control form-select-lg" />
                   </div>
                   <div class="form-outline mb-4">
                     <label class="form-label" for="form3Example1cg">Description</label>
+                    {% for message in get_flashed_messages(category_filter=['description']) %}
+                            <p class="h6 text-danger">* {{message}}</p>
+                    {% endfor %}
                     <textarea name="description" id="" cols="10" rows="2" class="form-control"></textarea>
                   </div>
                   <div class="form-outline mb-4">
                     <label class="form-label" for="form3Example1cg">Pitch</label>
+                    {% for message in get_flashed_messages(category_filter=['pitch']) %}
+                            <p class="h6 text-danger">* {{message}}</p>
+                    {% endfor %}
                     <textarea name="pitch" id="" cols="10" rows="2" class="form-control"></textarea>
                   </div>
 
                   <div class="form-outline mb-4">
                     <label class="form-label" for="form3Example1cg">Project Video (.mp4)</label>
+                    {% for message in get_flashed_messages(category_filter=['video']) %}
+                            <p class="h6 text-danger">* {{message}}</p>
+                        {% endfor %}
                     <input type="file" name="video" accept=".mp4" id="form3Example1cg" class="form-control" />
                   </div>
                   <div class="form-outline mb-4">
                     <label class="form-label" for="form3Example1cg">Project Image (JPG or PNG)</label>
+                    {% for message in get_flashed_messages(category_filter=['image']) %}
+                            <p class="h6 text-danger">* {{message}}</p>
+                    {% endfor %}
                     <input type="file" name="image" accept=".jpg, .jpeg, .png" id="form3Example1cg" class="form-control" />
                   </div>
 
                   <div class="form-outline mb-4">
                     <label class="form-label" for="form3Example3cg">Type</label>
+                    {% for message in get_flashed_messages(category_filter=['model']) %}
+                            <p class="h6 text-danger">* {{message}}</p>
+                    {% endfor %}
                     <select id="form3Example3cg" name="model" class="form-select" aria-label="Type">
                       <option value="" disabled selected>Select a Type</option>
                       <option value="b2b">B2B</option>
@@ -136,6 +154,9 @@
                   </div>
                   <div class="form-outline mb-4">
                     <label class="form-label" for="form3Example3cg">Category</label>
+                    {% for message in get_flashed_messages(category_filter=['category']) %}
+                            <p class="h6 text-danger">* {{message}}</p>
+                    {% endfor %}
                     <select id="choices-multiple-remove-button" name="category" placeholder="Select your Category">
                       <option selected>Select your Category</option>
                       <option value="technology">Technology</option>
@@ -156,33 +177,51 @@
 
                   <div class="form-outline mb-4">
                     <label class="form-label" for="form3Example4cg">Amount Already Raised</label>
+                    {% for message in get_flashed_messages(category_filter=['capital']) %}
+                            <p class="h6 text-danger">* {{message}}</p>
+                    {% endfor %}
                     <input type="number" id="form3Example4cg" name="capital" class="form-control" min="0.1"
                       step="0.1" />
                   </div>
 
                   <div class="form-outline mb-4">
                     <label class="form-label" for="form3Example4cdg">Funding Goal</label>
+                    {% for message in get_flashed_messages(category_filter=['goal']) %}
+                            <p class="h6 text-danger">* {{message}}</p>
+                    {% endfor %}
                     <input type="number" id="form3Example4cdg" name="goal" class="form-control" min="0.1" step="0.1" />
                   </div>
 
                   <div class="form-outline mb-4">
                     <label class="form-label" for="form3Example1cg">Funding Deadline</label>
+                    {% for message in get_flashed_messages(category_filter=['deadline']) %}
+                            <p class="h6 text-danger">* {{message}}</p>
+                    {% endfor %}
                     <input type="Date" id="form3Example1cg" name="deadline" class="form-control" />
                   </div>
 
                   <div class="form-outline mb-4">
                     <label class="form-label" for="form3Example1cg">Tax Code</label>
+                    {% for message in get_flashed_messages(category_filter=['tax_code']) %}
+                            <p class="h6 text-danger">* {{message}}</p>
+                    {% endfor %}
                     <input type="text" id="form3Example1cg" name="tax_code" class="form-control" />
                   </div>
 
 
                   <div class="form-outline mb-4">
                     <label class="form-label" for="form3Example1cg">Bank details (RIB)</label>
+                    {% for message in get_flashed_messages(category_filter=['bank_details']) %}
+                            <p class="h6 text-danger">* {{message}}</p>
+                    {% endfor %}
                     <input type="text" id="form3Example1cg" name="bank_details" class="form-control " />
                   </div>
 
                   <div class="form-outline mb-4">
                     <label class="form-label" for="form3Example1cg">Upload Business Plan (.pdf)</label>
+                    {% for message in get_flashed_messages(category_filter=['business_plan']) %}
+                            <p class="h6 text-danger">* {{message}}</p>
+                    {% endfor %}
                     <input type="file" id="form3Example1cg" name="business_plan" accept=".pdf" class="form-control" />
                   </div>
                   <input type="hidden" value="pending" name="status">

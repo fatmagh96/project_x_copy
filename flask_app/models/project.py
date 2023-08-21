@@ -2,6 +2,7 @@ from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
 from flask_app import DATABASE
 from datetime import datetime
+from datetime import timedelta
 
 class Project:
     def __init__(self,data_dict):
@@ -39,6 +40,16 @@ class Project:
         """
         return connectToMySQL(DATABASE).query_db(query, data_dict)
     
+    # ---------------------- UPDATE AMOUNT RAISED-----------------
+
+    @classmethod
+    def updated_amount_raised(cls, data_dict):
+        query = """
+                    UPDATE projects SET amount_raised = %(amount_raised)s
+                    WHERE id = %(id)s;
+                """
+        return connectToMySQL(DATABASE).query_db(query, data_dict)
+    
     # --------------- GET PROJECT BY USER ID ----------------
     @classmethod
     def get_project_by_user_id(cls, data_dict):
@@ -71,3 +82,88 @@ class Project:
             project = cls(row)
             all_projects.append(project)
         return all_projects
+    
+
+    # ======================VALIDATION =============================
+    @staticmethod
+    def validate(data_dict):
+        is_valid = True
+        if len(data_dict['title'])<2:
+            is_valid =False
+            flash("Title not valid", "title")
+        if 'model' not in data_dict or data_dict['model'] not in {
+            "b2b", "b2c"
+            }:
+            is_valid = False
+            flash("model is required", "model")
+        if len(data_dict["description"])<10:
+            is_valid = False
+            flash("Description too short","description")
+        if len(data_dict['pitch'])<10:
+            is_valid =False
+            flash("Pitch not valid", "pitch")    
+        if data_dict['image'] =='':
+            is_valid = False
+            flash("image is required", "image")
+
+        if data_dict['video'] =='':
+            is_valid = False
+            flash("Video is required", "video")
+        
+        if 'category' not in data_dict or data_dict['category'] not in {
+            "technology", "engineering", "business", 
+            "healthcare", "education", "art", 
+            "social", "research", "design", 
+            "travel", "green-projects", "development", 
+            "entertainment"
+            }:
+            is_valid = False
+            flash("Invalid category selection", "category")
+
+
+        if data_dict['capital']=="":
+            is_valid = False
+            flash("Cannot be empty", "capital")
+        elif int(data_dict['capital'])< 0 :
+            is_valid = False
+            flash("Amount not valid", "capital")
+        
+        if data_dict['goal']=="":
+            is_valid = False
+            flash("Cannot be empty", "goal")
+        elif int(data_dict['goal'])< 0 :
+            is_valid = False
+            flash("Amount not valid", "goal")
+        
+
+        max_future_date = datetime.now() + timedelta(days=5 * 365) 
+        date_obj = datetime.strptime( data_dict['deadline'], '%Y-%m-%d')
+
+        if data_dict['deadline'] == "":
+            is_valid = False
+            flash("Date is required", "deadline")
+        elif date_obj < datetime.now():
+            is_valid = False
+            flash("Date should start from today", "deadline")
+        elif date_obj > max_future_date:
+            is_valid = False
+            flash("Date cannot be superior to 5 years from now", "deadline")
+        
+        if len(data_dict['tax_code'])<7:
+            is_valid =False
+            flash("Tax code not valid", "tax_code")
+
+        if len(data_dict['bank_details'])<7:
+            is_valid =False
+            flash("Bank details not valid", "bank_details")
+
+        
+        if data_dict['business_plan'] =='':
+            is_valid = False
+            flash("business plan file is required", "business_plan")
+
+        # if not data_dict.get('terms'):
+        #     is_valid = False
+        #     flash("You must agree to the terms.", "terms")
+        
+        return is_valid
