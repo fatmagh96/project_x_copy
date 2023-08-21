@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg nav_background py-2" data-bs-theme="dark">
         <div class="container-fluid">
@@ -112,27 +112,23 @@
         </div>
         <!----------------- Nav tabs ------------------------------------>
         <div class="container mt-5">
-            <ul class="nav nav-tabs justify-content-center" role="tablist">
+            <ul class="nav nav-tabs justify-content-center" role="tablist" id="myTab">
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link active" data-bs-toggle="tab" href="#overview" aria-selected="true"
-                        role="tab">Overview</a>
+                    <a class="nav-link active" id="overview-tab" data-bs-toggle="tab" href="#overview" aria-selected="true" role="tab">Overview</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link" data-bs-toggle="tab" href="#team" aria-selected="false" role="tab"
-                        tabindex="-1">Team</a>
+                    <a class="nav-link" id="team-tab" data-bs-toggle="tab" href="#team" aria-selected="false" role="tab">Team</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link" data-bs-toggle="tab" href="#updates" aria-selected="false" role="tab"
-                        tabindex="-1">Updates</a>
+                    <a class="nav-link" id="updates-tab" data-bs-toggle="tab" href="#updates" aria-selected="false" role="tab">Updates</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link" data-bs-toggle="tab" href="#edit" aria-selected="false" role="tab"
-                        tabindex="-1">Edit</a>
+                    <a class="nav-link" id="edit-tab" data-bs-toggle="tab" href="#edit" aria-selected="false" role="tab" >Edit</a>
                 </li>
             </ul>
             <div id="myTabContent" class="tab-content">
                 <!-- Overview ------------------------------->
-                <div class="tab-pane fade active show" id="overview" role="tabpanel">
+                <div class="tab-pane fade active show" id="overview" role="tabpanel" aria-labelledby="overview-tab">
                     <div class=" p-5">
                         <div class="row d-flex justify-content-center">
                             <div class="col-6">
@@ -193,7 +189,7 @@
                 </div>
                 <!-- end Overview --------------------------->
                 <!-- Team ------------------------------->
-                <div class="tab-pane fade" id="team" role="tabpanel">
+                <div class="tab-pane fade" id="team" role="tabpanel" aria-labelledby="team-tab">
                     <!-- ************************** modal team *********************** -->
 
                     <!-- ------------------------------modal button----------------------- -->
@@ -212,18 +208,20 @@
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
+                            <form class="modal-content" action="/team_member/create" method="post"
+                                enctype="multipart/form-data">
                                 <div class="modal-body">
                                     <h1 class="p-4">Add Teammate</h1>
-                                    <form class="mt-5 m-3">
+                                    <div class="mt-5 m-3">
                                         <div class="d-flex flex-column" id="formfield ">
                                             <div>
                                                 <div class="form-group">
                                                     <label for="formFile" class="form-label mt-4">Upload Profile
                                                         Image</label>
-                                                    <input class="form-control" type="file" id="formFile">
+                                                    <input class="form-control" type="file" id="formFile" name="image">
                                                 </div>
                                             </div>
+                                            <input type="hidden" name="project_id" value="{{project.id}}">
                                             <div class="d-flex gap-2">
                                                 <div class="mt-3">
                                                     <label class="form-label" for="">First Name</label>
@@ -246,55 +244,43 @@
                                             <textarea name="summary" id="" cols="300" class=" form-control mb-3  "
                                                 rows="5"></textarea>
                                         </div>
-                                    </form>
+                                    </div>
 
                                 </div>
 
                                 <!-- -------------------------- Add Button---------------------- -->
 
                                 <div class="d-flex justify-content-end m-3 gap-2">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Add</button>
+                                    <a class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
+                                    <button class="btn btn-primary">Add</button>
                                 </div>
 
                                 <!-- ----------------------------------------------------------- -->
 
-                            </div>
+                            </form>
                         </div>
                     </div>
+                    {% for team_member in teams %}
                     <div class="d-flex gap-3 mt-4">
                         <div class="avatar border border-0 rounded">
-                            <img src="{{ url_for('static', filename='assets/large_cropped_square_cropped_Lp0JqX83_400x400__1_.jpg') }}"
+                            <img src="{{ url_for('static', filename=team_member.image.replace('flask_app/static/', '')) }}"
                                 alt="" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
                         </div>
                         <div class="p-4">
-                            <h4>Salah Mejri</h4>
-                            <h6 class="text-dark">CEO</h6>
-                            <p>Founding engineer at Codeacademy, formerly at Yahoo and Facebook.</p>
+                            <h4>{{team_member.first_name}} {{team_member.last_name}}</h4>
+                            <h6 class="text-dark">{{team_member.role}}</h6>
+                            <p>{{team_member.summary}}</p>
                         </div>
-                        <button type="button" class="btn btn-danger align-center" style="height: 40px;">Delete</button>
-                    </div>
-                    <div class="d-flex gap-3 mt-4">
-                        <div class="avatar border border-0 rounded">
-                            <img src="{{ url_for('static', filename='assets/large_cropped_square_cropped_Lp0JqX83_400x400__1_.jpg') }}"
-                                alt="" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
-                        </div>
-                        <div class="p-4">
-                            <h3>Ayoub Mejri</h3>
-                            <h6 class="text-dark">CEO</h6>
-                            <p>Founding engineer at Codeacademy, formerly at Yahoo and Facebook.</p>
-                        </div>
-                        <form action="# method="POST">
-                            <!-- <input type="hidden" name="team_id" value="{{ team_id }}"> -->
-                            <button type="submit" class="btn btn-danger align-center"
-                                style="height: 40px;">Delete</button>
+                        <form action="/team/destroy" method="post">
+                            <input type="hidden" name="id" value="{{team_member.id}}">
+                            <button class="btn btn-danger align-center" style="height: 40px;">Delete</button>
                         </form>
                     </div>
+                    {% endfor%}
                 </div>
                 <!--End Team ------------------------------->
                 <!--Start Updates ----------------------------->
-                <div class="tab-pane fade" id="updates" role="tabpanel">
+                <div class="tab-pane fade" id="updates" role="tabpanel" aria-labelledby="updates-tab">
 
                     <!-- ************************** modal updates *********************** -->
 
@@ -311,30 +297,35 @@
                             <div class="modal-content">
                                 <div class="modal-body">
                                     <h1 class="p-4">Update</h1>
-                                    <form class="mt-5 m-3">
+                                    <form class="mt-5 m-3" action="/updates/create" method="post"
+                                        enctype="multipart/form-data">
                                         <div class="d-flex flex-column" id="formfield ">
                                             <div>
+
                                                 <div class="mt-3">
                                                     <label class="form-label" for="">Update Title</label>
-                                                    <input type="textarea" name="update_title"
-                                                        class="text form-control mb-3 " placeholder="update_title"
-                                                        required>
+                                                    <input type="text" name="title" class="form-control mb-3 "
+                                                        placeholder="updates_title" required value=>
                                                 </div>
                                                 <div class="form-group flex-column">
                                                     <label for="formFile" class="form-label mt-4">Upload An
                                                         Image</label>
-                                                    <input class="form-control" type="file" id="formFile">
+                                                    <input class="form-control" type="file" id="formFile" name="image">
+                                                    <!-- #changed the id of this input from formFile to imageInput -->
                                                 </div>
                                             </div>
                                             <div class="d-flex flex-column gap-2">
                                                 <div>
-                                                    <label class="form-label " for="">Description</label>
+                                                    <label class="form-label " for="">Descriptions</label>
                                                     <!-- <input type="textarea" name="summary" class="text form-control m-3"  placeholder="summary" required> -->
-                                                    <textarea name="description" id="" cols="300"
-                                                        class=" form-control mb-3  " rows="5"></textarea>
+                                                    <textarea name="description" id="descriptionInput" cols="300"
+                                                        class=" form-control mb-3  " rows="5"> </textarea>
                                                 </div>
+                                                <input type="hidden" value="{{project.id}}" name="project_id">
                                             </div>
                                         </div>
+                                        <!-- <button type="button" class="btn btn-primary" onclick="addPhotoDescription()">Add</button> -->
+                                        <input type="submit" value="Add" class="btn btn-primary">
                                     </form>
                                 </div>
 
@@ -343,113 +334,66 @@
                                 <div class="d-flex justify-content-end m-3 gap-2">
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Add</button>
-                                </div>
 
+                                </div>
+                                <!--  the new photos -->
                                 <!-- ----------------------------------------------------------- -->
-
                             </div>
                         </div>
                     </div>
-                    <div class="container  ms-3">
-                        <div class="card p-3 mt-4 mb-3 card_update">
-                            <h3 class="p-3 mt-4 mb-3">Title</h3>
-                            <img src="{{ url_for('static', filename='assets/pexels-sevenstorm-juhaszimrus-575392.jpg') }}"
-                                alt="" style="height: 85%; width: 75%;">
-                            <div class="content mt-4">
+                    <div class="container col-8 ms-3">
+                        {% for update in all_updates %}
+                        <div class="card p-2 mt-4 mb-3 ms-3 card_update">
+                            <h3 class="mt-2 mb-3">{{ update.title }}</h3>
+                            <img src="{{ url_for('static', filename=update.image.replace('flask_app/static/', '')) }}"
+                                alt="{{ update.title }}" width="700rem" height="400rem">
+
+                            <div class="content mt-3">
                                 <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut tenetur porro eaque
-                                    magni dicta. Distinctio ipsa, sequi ipsam cupiditate necessitatibus id at iusto
-                                    veritatis, alias magnam saepe voluptatum culpa accusamus.
-                                    Qui voluptatum rem ullam facere doloremque eum, nihil, repudiandae eligendi quidem
-                                    sunt dolore unde debitis quas maiores nulla possimus iusto similique consectetur
-                                    itaque in dicta. Laboriosam nulla nam distinctio dolor?
-                                    Sed dignissimos veritatis laudantium dolore sequi quam possimus perspiciatis eos,
-                                    repudiandae in fugiat distinctio laborum odio qui voluptas, eligendi architecto
-                                    officia modi doloribus aliquid? Cumque eaque doloremque quibusdam rerum eveniet?
-                                    Repellendus, libero aperiam. Facilis laboriosam iure deleniti quo tempore eum nulla
-                                    unde, architecto quasi quis, error dolorem similique consectetur molestias ea a quae
-                                    minima, alias consequuntur nisi placeat! Ipsa, adipisci!
-                                    Omnis nemo libero enim maiores consequatur animi doloribus, numquam nostrum delectus
-                                    iusto, tenetur temporibus! Labore amet commodi iste architecto a provident. Autem,
-                                    beatae! Reprehenderit sint voluptatum quis quam maxime itaque!
+                                    {{ update.description }}
                                 </p>
                             </div>
-                            <a class="read-more">Read more</a>
-                            <div class="d-flex justify-content-end gap-2">
-                                <button type="button" class="btn btn-success ">Edit</button>
-                                <button type="button" class="btn btn-danger ">Delite</button>
-                            </div>
+                            <form class="d-flex justify-content-end" action="/updates/destroy" method="post">
+                                <input type="hidden" name="id" value="{{update.id}}">
+                                <button class="btn btn-danger   align-center" style="height: 40px;">Delete</button>
+                            </form>
                         </div>
-                    </div>
-                    <div class="container  ms-3">
-                        <div class=" card p-3 mt-4 mb-3 card_update">
-                            <h3 class=" p-3 mt-4 mb-3">Title</h3>
-                            <div class="d-flex justify-content-center">
-                                <img src="{{ url_for('static', filename='assets/investment-background-snj8ylr71lc323ot.jpg') }}"
-                                    alt="" style="height: 85%; width: 75%;">
-                            </div>
-                            <div class="content mt-4">
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut tenetur porro eaque
-                                    magni dicta. Distinctio ipsa, sequi ipsam cupiditate necessitatibus id at iusto
-                                    veritatis, alias magnam saepe voluptatum culpa accusamus.
-                                    Qui voluptatum rem ullam facere doloremque eum, nihil, repudiandae eligendi quidem
-                                    sunt dolore unde debitis quas maiores nulla possimus iusto similique consectetur
-                                    itaque in dicta. Laboriosam nulla nam distinctio dolor?
-                                    Sed dignissimos veritatis laudantium dolore sequi quam possimus perspiciatis eos,
-                                    repudiandae in fugiat distinctio laborum odio qui voluptas, eligendi architecto
-                                    officia modi doloribus aliquid? Cumque eaque doloremque quibusdam rerum eveniet?
-                                    Repellendus, libero aperiam. Facilis laboriosam iure deleniti quo tempore eum nulla
-                                    unde, architecto quasi quis, error dolorem similique consectetur molestias ea a quae
-                                    minima, alias consequuntur nisi placeat! Ipsa, adipisci!
-                                    Omnis nemo libero enim maiores consequatur animi doloribus, numquam nostrum delectus
-                                    iusto, tenetur temporibus! Labore amet commodi iste architecto a provident. Autem,
-                                    beatae! Reprehenderit sint voluptatum quis quam maxime itaque!
-                                </p>
-                            </div>
-                            <a class="read-more">Read more</a>
-                            <div class="d-flex justify-content-end gap-2">
-                                <button type="button" class="btn btn-success ">Edit</button>
-                                <button type="button" class="btn btn-danger ">Delite</button>
-                            </div>
-
-                        </div>
-
+                        {% endfor %}
                     </div>
                 </div>
-                <!--End Updates ----------------------------->
-                <!-- Start Edit---------------------------- -->
-                <div class="tab-pane fade" id="edit" role="tabpanel">
-                    <div class="mt-4">
-                        <h2>Edit Your Project</h2>
-                        <form class="mt-5">
-                            <!-- -----------------upload video------------------- -->
-                            <div class=" col-5 ">
-                                <label class="h4 mt-3" for="">Your Video</label>
-                                <div class="form-group ">
-                                    <label for="formFile" class="form-label">Upload video file</label>
-                                    <input class="form-control mb-3" type="file" id="formFile">
-                                </div>
-                            </div>
-                            <!-- ------------------- Project registration---------------- -->
-                            <div id="myTabContent" class="tab-content">
-                                <div class="tab-pane fade show active" id="edit" role="tabpanel">
-                                    <label class="h4 mt-3" for="">Description</label>
-                                    <textarea name="Description" id="" class=" form-control w-70 " rows="5"></textarea>
-                                    <label class="h4 mt-3" for="">About Us</label>
-                                    <textarea name="about_us" id="" class=" form-control w-70" rows="5"></textarea>
-                                </div>
-                            </div>
-                        </form>
-                        <button class="btn btn-success mt-5">Save Changes</button>
-                    </div>
-                </div>
-                <!-- end edit -->
             </div>
+            <!--End Updates ----------------------------->
+            <!-- Start Edit---------------------------- -->
+            <div class="tab-pane fade" id="edit" role="tabpanel" aria-labelledby="edit-tab">
+                <div class="mt-4">
+                    <h2>Edit Your Project</h2>
+                    <form class="mt-5">
+                        <!-- -----------------upload video------------------- -->
+                        <div class=" col-5 ">
+                            <label class="h4 mt-3" for="">Your Video</label>
+                            <div class="form-group ">
+                                <label for="formFile" class="form-label">Upload video file</label>
+                                <input class="form-control mb-3" type="file" id="formFile">
+                            </div>
+                        </div>
+                        <!-- ------------------- Project registration---------------- -->
+                        <div id="myTabContent" class="tab-content">
+                            <div class="tab-pane fade show active" id="edit" role="tabpanel">
+                                <label class="h4 mt-3" for="">Description</label>
+                                <textarea name="Description" id="" class=" form-control w-70 " rows="5"></textarea>
+                                <label class="h4 mt-3" for="">About Us</label>
+                                <textarea name="about_us" id="" class=" form-control w-70" rows="5"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                    <button class="btn btn-success mt-5">Save Changes</button>
+                </div>
+            </div>
+            <!-- end edit -->
         </div>
-        <!-----------------End Nav tabs ------------------------------------>
     </div>
+    <!-----------------End Nav tabs ------------------------------------>
+    
 
 
 
@@ -567,6 +511,22 @@
             }
         });
     </script>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></script>
+        <script>
+            // Add a JavaScript function to redirect to a specific tab
+            function redirectToTab(tabId) {
+                $('#myTab a[href="#' + tabId + '"]').tab('show');
+            }
+    
+            // Check if there's a hash in the URL and redirect to the corresponding tab
+            $(document).ready(function() {
+                if (window.location.hash) {
+                    var tabId = window.location.hash.substring(1);
+                    redirectToTab(tabId);
+                }
+            });
+        </script>
 </body>
 
 </html>

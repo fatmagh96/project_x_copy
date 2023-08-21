@@ -104,8 +104,7 @@
       <div class="col-8">
 
         <video controls width="100%">
-          <source src="{{ url_for('static', filename='assets/'+project.video) }}"
-            type="video/mp4">
+          <source src="{{ url_for('static', filename='assets/'+project.video) }}" type="video/mp4">
           Your browser does not support the video tag.
         </video>
         <div class="container mt-5">
@@ -252,41 +251,74 @@
             <h6>Time Left:</h6>
             <h6>{{time_left.months}} months {{time_left.days}} days</h6>
           </div>
-          {% if 'id' in session %}
-            {% if user.type == 'investor' %}
-              <form action="#" method="post">
-                <div class="row d-flex justify-content-between align-items-baseline">
-                  {% for message in get_flashed_messages(category_filter=['investment_danger'])%}
-                        <p class="text-danger">{{message}}</p>
-                  {%endfor%}
-                  {% for message in get_flashed_messages(category_filter=['investment_success'])%}
-                        <p class="text-success">{{message}}</p>
-                  {%endfor%}
-                  <div class="col">
-                    <label for="" class="fs-6">Amount (TND):</label>
-                  </div>
-                  <div class="col">
-                    <form action="/make_investment" method="post">
-                      <input type="number" id="float-number" name="amount" min="0.1" class="form-control mt-4 mb-1" step="0.1" placeholder="0">
-                    </form>
-                  </div>
-                </div>
-                <input type="submit" value="Invest" class="btn btn-success w-100  ">
+          <!-- <form action="/investments/new/{{project.id}}" method="post"></form> -->
+          {% if 'id' not in session %}
+            <div class="mt-5 mb-2">
+              <a href="/signin" class="btn btn-success w-100">Invest</a>
+            </div>
+            <button class="wf-btn-o wf-btn-normal w-100 text-sm btn btn-outline-danger mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+              </svg>
+              <span>Favourite</span>
+            </button>
+          {% elif user.type == 'investor' %}
+          <form action="/investments/new/{{project.id}}" method="post">
+            <div class="row d-flex justify-content-between align-items-baseline">
+              {% for message in get_flashed_messages(category_filter=['investment_danger'])%}
+              <p class="text-danger">{{message}}</p>
+              {%endfor%}
+              {% for message in get_flashed_messages(category_filter=['investment_success'])%}
+              <p class="text-success">{{message}}</p>
+              {%endfor%}
+              <div class="col">
+                <label for="" class="fs-6">Amount (TND):</label>
+              </div>
+              <div class="col">
+                  <input type="number" id="float-number" name="amount" min="0.1" class="form-control mt-4 mb-1"
+                    step="0.1" placeholder="0">
+              </div>
+            </div>
+            <input type="submit" value="Invest" class="btn btn-success w-100  ">
+          </form>
+            {% if is_favourited %}
+            <button class="wf-btn-o wf-btn-normal btn btn-danger  w-100 text-sm mt-2 mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill white-heart"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                  d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+              </svg>
+              <span>Favourited</span>
+            </button>
+            {%else%}
+              <form action="/add_to_favourites" method="post">
+                <input type="hidden" name="project_id" value="{{project.id}}">
+                <input type="hidden" name="user_id" value="{{user.id}}">
+                <button id="favouriteBtn" class="wf-btn-o wf-btn-normal w-100 text-sm btn btn-outline-danger mb-4 mt-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill"
+                    viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+                  </svg>
+                  <span>Favourite</span>
+                </button>
               </form>
             {%endif%}
-         
-          <div class="mt-5 mb-2">
-            <a href="/signin" class="btn btn-success w-100">Invest</a>
-          </div>
+          {% else%}
+            <div class="mt-5 mb-2">
+              <a href="/signin" class="btn btn-success w-100">Invest</a>
+            </div>
+            <button class="wf-btn-o wf-btn-normal w-100 text-sm btn btn-outline-danger mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+              </svg>
+              <span>Favourite</span>
+            </button>
+            
           {%endif%}
+
           
-          <button class="wf-btn-o wf-btn-normal w-100 text-sm btn btn-outline-danger mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill"
-              viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-            </svg>
-            <span>Favourite</span>
-          </button>
         </div>
 
       </div>
@@ -296,7 +328,7 @@
     <!-- tabs -->
   </div>
 
-    <!-------------------- Footer -------------------------------->
+  <!-------------------- Footer -------------------------------->
   <!-- footer -->
   <footer class="bg-light text-center text-lg-start ">
     <div class="container p-5">
@@ -321,7 +353,7 @@
             <li>
               <a href="/explore" class="text-dark" style="font-size: smaller;">Explore</a>
             </li>
-            
+
           </ul>
         </div>
       </div>

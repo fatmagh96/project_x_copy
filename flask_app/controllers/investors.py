@@ -2,6 +2,8 @@ from flask import render_template, request, redirect, session, flash
 from flask_app import app
 
 from flask_app.models.user import User
+from flask_app.models.investment import Investment
+
 
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
@@ -13,7 +15,10 @@ def investor_dashboard():
     user = User.get_user_by_id({'id':session['id']})
     if user.type != 'investor':
         return redirect('/')
-    return render_template('investor_dashboard.html', user=user)
+    investments = Investment.get_all_projects_invested_in_by_user_id({'user_id':session['id']})
+    favourited_investments = User.get_favourite_projects_by_user_id({'user_id':session['id']})
+    
+    return render_template('investor_dashboard.html', user=user , investments=investments , favourited_investments=favourited_investments)
 
 
 @app.route('/add_money/<int:id>', methods=['POST'])
@@ -69,6 +74,24 @@ def update_investor_password():
         return redirect("/investors/dashboard#profile")
     return redirect("/investors/dashboard#profile")
 
+
+@app.route('/add_to_favourites', methods=['POST'])
+def add_to_favourites():
+    User.add_to_favourites(request.form)
+    project_id = request.form['project_id']
+    return redirect(f'/projects/{project_id}/show')
+
+
+@app.route('/remove_from_favourites', methods=['POST'])
+def remove_from_favourites():
+    User.remove_from_favourites(request.form)
+    project_id = request.form['project_id']
+    return redirect("/investors/dashboard#favourites")
+
+# @app.route('/test', methods=['POST'])
+# def test():
+#     print("TEST REQUEST FORM", request.form)
+#     return 0
 
 
 

@@ -77,3 +77,30 @@
     cursor: pointer;
   }
 
+  .red-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .white-heart {
+    fill: white;
+    margin-right: 8px;
+  }
+
+  /* Remove color change on hover */
+  .red-button:hover,
+  .red-button:active {
+    background-color: red;
+  }
+
+  /* If you want to remove text color change on hover */
+  .red-button:hover,
+  .red-button:active {
+    color: white;
+  }

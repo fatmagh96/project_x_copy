@@ -22,12 +22,13 @@ def register_project():
 
 @app.route('/explore')
 def explore():
-    projects = Project.get_all_projects()
+    # projects = Project.get_all_projects()
+    projects = Project.get_all_accepted_projects()
     return render_template('all_projects.html', projects= projects)
 
-@app.route('/projects/id/show')
-def project_show():
-    return render_template('one_project_show.html')
+# @app.route('/projects/id/show')
+# def project_show():
+#     return render_template('one_project_show.html')
 
 
 # @app.route('/open-modal')

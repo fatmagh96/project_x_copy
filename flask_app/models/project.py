@@ -17,6 +17,8 @@ class Project:
         self.capital = data_dict['capital']
         self.goal = data_dict['goal']
         self.amount_raised = data_dict['amount_raised']
+        self.total = float(data_dict['amount_raised']) + float(data_dict['capital'])
+        self.percentage = round(float(self.total)*100 / float(data_dict['goal']),1)
         self.deadline = data_dict['deadline']
         self.tax_code = data_dict['tax_code']
         self.bank_details = data_dict['bank_details']
@@ -46,7 +48,7 @@ class Project:
     def updated_amount_raised(cls, data_dict):
         query = """
                     UPDATE projects SET amount_raised = %(amount_raised)s
-                    WHERE id = %(id)s;
+                    WHERE id = %(project_id)s;
                 """
         return connectToMySQL(DATABASE).query_db(query, data_dict)
     
@@ -76,6 +78,17 @@ class Project:
     @classmethod
     def get_all_projects(cls):
         query = "SELECT * FROM projects;"
+        result = connectToMySQL(DATABASE).query_db(query)
+        all_projects = []
+        for row in result:
+            project = cls(row)
+            all_projects.append(project)
+        return all_projects
+    
+    # ------- GET ALL ACCEPTED PROJECTS -----------------
+    @classmethod
+    def get_all_accepted_projects(cls):
+        query = "SELECT * FROM projects WHERE status = 'accepted';"
         result = connectToMySQL(DATABASE).query_db(query)
         all_projects = []
         for row in result:

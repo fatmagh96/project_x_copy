@@ -17,6 +17,8 @@ class Investment:
         self.updated_at = data_dict['updated_at']
         self.project = ""
 
+    # ------------- MAKE INVESTMENT --------------
+
     @classmethod
     def make_investment(cls, data_dict):
         query = """
@@ -25,11 +27,13 @@ class Investment:
                 """
         return connectToMySQL(DATABASE).query_db(query, data_dict)
     
+
+    
     @classmethod
     def get_all_projects_invested_in_by_user_id(cls, data_dict):
         query = """
                     SELECT * FROM investments LEFT JOIN projects ON project_id = projects.id
-                    WHERE user_id = %(user_id)s;
+                    WHERE investments.user_id = %(user_id)s;
                 """
         result = connectToMySQL(DATABASE).query_db(query, data_dict)
         all_investments = []

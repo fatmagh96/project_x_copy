@@ -123,7 +123,7 @@ class User:
     @classmethod
     def remove_from_favourites(cls, data_dict):
         query = """ DELETE FROM favourites
-                    WHERE id = %(id)s;
+                    WHERE user_id = %(user_id)s AND project_id = %(project_id)s;
                      """
         result = connectToMySQL(DATABASE).query_db(query, data_dict)
         return result
@@ -131,14 +131,25 @@ class User:
     @classmethod
     def get_favourite_projects_by_user_id(cls, data_dict):
         query = """ SELECT * FROM projects LEFT JOIN favourites ON project_id = projects.id
-                    WHERE user_id = %(user_id)s;
+                    WHERE favourites.user_id = %(user_id)s;
                     """
         result = connectToMySQL(DATABASE).query_db(query, data_dict)
         favourite_projects = []
         if result:
             for row in result:
                 favourite_projects.append(Project(row))
-            return favourite_projects
+        return favourite_projects
+        
+    
+    @classmethod
+    def get_favourite(cls, data_dict):
+        query = """ SELECT * FROM favourites
+                    WHERE user_id = %(user_id)s AND project_id = %(project_id)s;
+                    """
+        result = connectToMySQL(DATABASE).query_db(query, data_dict)
+        
+        if result:
+            return True
         return False
 
     # ----- ADMIN -----

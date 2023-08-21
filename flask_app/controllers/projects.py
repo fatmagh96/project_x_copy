@@ -2,6 +2,8 @@ from flask import render_template, request, redirect, session, url_for, flash
 from flask_app import app
 from flask_app.models.user import User
 from flask_app.models.project import Project
+from flask_app.models.team_model import Team
+from flask_app.models.update import Update
 from datetime import datetime
 
 from flask_bcrypt import Bcrypt
@@ -14,8 +16,11 @@ bcrypt = Bcrypt(app)
 
 @app.route('/projects/dashboard/accepted')
 def po_dashboard_accepted():
+    teams=Team.get_team()
     project = Project.get_project_by_user_id({'user_id':session['id']})
-    return render_template('dashboard_po_accepted.html', project = project)
+    update = Update.get_by_id_update({'id':project.id})
+    all_updates = Update.get_updates({'project_id':project.id})
+    return render_template('dashboard_po_accepted.html',teams=teams ,project = project , update=update, all_updates=all_updates )
 
 
 @app.route('/projects/dashboard/pending')
@@ -49,8 +54,10 @@ def show_project(project_id):
             'days':round(days_left % average_days_in_month)
         }
     total = project.amount_raised + project.capital
-    percentage = float(total)*100 / float(project.goal)
+    percentage_value = float(total)*100 / float(project.goal)
+    percentage = round(percentage_value, 1)
 
     user = User.get_user_by_id(session)
-    return render_template("one_project_show.html", project = project ,user=user,total = total , percentage=percentage , time_left=time_left)
+    is_favourited = User.get_favourite({'user_id':user.id, 'project_id':project_id})
+    return render_template("one_project_show.html", project = project,is_favourited=is_favourited ,user=user,total = total , percentage=percentage , time_left=time_left)
 
