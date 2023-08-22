@@ -28,6 +28,7 @@ class Project:
         self.created_at = data_dict['created_at']
         self.updated_at = data_dict['updated_at']
         self.investors = []
+        self.po = ''
 
     #======================CREATE==========================
 
@@ -80,22 +81,96 @@ class Project:
         query = "SELECT * FROM projects;"
         result = connectToMySQL(DATABASE).query_db(query)
         all_projects = []
-        for row in result:
-            project = cls(row)
-            all_projects.append(project)
+        if result:
+            for row in result:
+                project = cls(row)
+                all_projects.append(project)
         return all_projects
+    
+
+    # =================================
+    @classmethod
+    def get_projects_by_po(cls):
+        query = """
+                SELECT * FROM projects JOIN users ON projects.user_id = users.id;
+                """
+        result = connectToMySQL(DATABASE).query_db(query)
+        projects = []
+        if result:
+            for row in result:
+                project = cls(row)
+                project.po = f"{row['first_name']} {row['last_name']}"
+                projects.append(project)
+        return projects
+    
+    # ------- GET ALL Pending PROJECTS -----------------
+    @classmethod
+    def get_all_pending_projects(cls):
+        query = "SELECT * FROM projects where status = 'pending';"
+        result = connectToMySQL(DATABASE).query_db(query)
+        pending_projects = []
+        if result:
+            for row in result:
+                project = cls(row)
+                pending_projects.append(project)
+        return pending_projects
+    
+    
     
     # ------- GET ALL ACCEPTED PROJECTS -----------------
     @classmethod
     def get_all_accepted_projects(cls):
-        query = "SELECT * FROM projects WHERE status = 'accepted';"
+        query = "SELECT * FROM projects where status = 'accepted';"
         result = connectToMySQL(DATABASE).query_db(query)
-        all_projects = []
-        for row in result:
-            project = cls(row)
-            all_projects.append(project)
-        return all_projects
+        accepted_projects = []
+        if result:
+            for row in result:
+                project = cls(row)
+                accepted_projects.append(project)
+        return accepted_projects
     
+    # ------- GET ALL declined PROJECTS -----------------
+    @classmethod
+    def get_all_declined_projects(cls):
+        query = "SELECT * FROM projects where status = 'rejected';"
+        result = connectToMySQL(DATABASE).query_db(query)
+        declined_projects = []
+        if result:
+            for row in result:
+                project = cls(row)
+                declined_projects.append(project)
+        return declined_projects
+
+
+
+    # -------- UPDATE status to accepted---------------
+    @classmethod
+    def pending_to_accepted(cls, data_dict):
+        query = """
+                UPDATE projects SET status = 'accepted',
+                acceptance_date = now()
+                WHERE id = %(id)s;
+                """
+        
+        result = connectToMySQL(DATABASE).query_db(query, data_dict)
+        return result
+    # -------- UPDATE status to decline---------------
+    @classmethod
+    def decline(cls, data_dict):
+        query = """
+                UPDATE projects SET status = 'rejected'
+                WHERE id = %(id)s;
+                """
+        result = connectToMySQL(DATABASE).query_db(query, data_dict)
+        return result
+
+
+
+
+
+
+
+
 
     # ======================VALIDATION =============================
     @staticmethod

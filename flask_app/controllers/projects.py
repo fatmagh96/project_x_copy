@@ -20,7 +20,17 @@ def po_dashboard_accepted():
     update = Update.get_by_id_update({'id':project.id})
     teams=Team.get_team_by_project({'project_id':project.id})
     all_updates = Update.get_updates({'project_id':project.id})
-    return render_template('dashboard_po_accepted.html',teams=teams ,project = project , update=update, all_updates=all_updates )
+    days_left = (project.deadline -datetime.now().date()).days
+    average_days_in_month = 30.44
+    time_left = {
+            'months':int(days_left // average_days_in_month),
+            'days':round(days_left % average_days_in_month)
+        }
+    total = project.amount_raised + project.capital
+    percentage_value = float(total)*100 / float(project.goal)
+    percentage = round(percentage_value)
+    print('PERCENTAGE**************', percentage)
+    return render_template('dashboard_po_accepted.html',teams=teams,days_left=days_left,time_left=time_left ,project = project , update=update, all_updates=all_updates, total=total, percentage=percentage )
 
 
 @app.route('/projects/dashboard/pending')

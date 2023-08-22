@@ -59,6 +59,18 @@ class User:
             all_investors.append(cls(row))
         return all_investors
     ##########################################################
+      # get all investors
+    @classmethod
+    def get_all_investors_investment(cls,all_investors):
+        for investor in all_investors:
+            investment_investor_query = "SELECT * FROM investments WHERE user_id = {};".format(investor.id)
+            investment_result = connectToMySQL(DATABASE).query_db(investment_investor_query)
+            invesment_amount = 0
+            for row in investment_result:
+                invesment_amount += row['amount']
+            investor.investment_count= len(investment_result)
+            investor.investment_amount=invesment_amount
+    ##########################################################
     
     # get all project owners
     

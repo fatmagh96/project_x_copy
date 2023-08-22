@@ -125,7 +125,7 @@
                 tabindex="0">
                 <!----------------------- DASHBOARD -------------------------->
                 <div class="col-5 m-4">
-                    <h1 class="text-dark">Welcome {{admin.first_name}}</h1>
+                    <h1 class="text-dark">Welcome Ha Admin</h1>
                     <h4 class="text-dark">Dashboard</h4>
                 </div>
                 <div class="container">
@@ -136,14 +136,14 @@
                                 style="height: 6rem;background-color: rgb(100, 199, 255);">
                                 <div class="card-body">
                                     <h5><i class="bi bi-cash-coin"></i> Investors</h5>
-                                    <h2 class="card-title">{{investor_count}}</h2>
+                                    <h2 class="card-title">001000</h2>
                                 </div>
                             </div>
                             <div class="card text-white mt-3"
                                 style="height: 6rem;background-color: rgb(166, 109, 212);">
                                 <div class="card-body">
                                     <h5><i class="bi bi-person-circle"></i> Project owners</h5>
-                                    <h2 class="card-title">{{pos_count}}</h2>
+                                    <h2 class="card-title">020313</h2>
                                 </div>
                             </div>
                         </div>
@@ -326,23 +326,37 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for project in all_pending_projects %}
                                 <tr>
-                                    <td>{{ project.id }}</td>
-                                    <td>{{ project.title }}</td>
-                                    <td>{{ project.status }}</td>
-                                    <td class="d-flex justify-content-center gap-3" >
+                                    <td>1</td>
+                                    <td>Project A</td>
+                                    <td>Pending</td>
+                                    <td class="d-flex justify-content-center gap-3">
                                         <button class="btn btn-primary">View Documents</button>
-                                        <form  action="/accept_project/{{ project.id }}" method="POST">
-                                            <button class="btn btn-success" type="submit">Accept</button>
-                                        </form>
-                                        <form  action="/decline_project/{{ project.id }}" method="POST">
-                                            <button class="btn btn-danger" type="submit">Decline</button>
-                                        </form>
+                                        <button class="btn btn-success">Accept</button>
+                                        <button class="btn btn-danger">Decline</button>
                                     </td>
                                 </tr>
-                                {% endfor %}
-                    
+                                <tr>
+                                    <td>2</td>
+                                    <td>Project B</td>
+                                    <td>Pending</td>
+                                    <td class="d-flex justify-content-center gap-3">
+                                        <button class="btn btn-primary">View Documents</button>
+                                        <button class="btn btn-success">Accept</button>
+                                        <button class="btn btn-danger">Decline</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Project C</td>
+                                    <td>Pending</td>
+                                    <td class="d-flex justify-content-center gap-3">
+                                        <button class="btn btn-primary">View Documents</button>
+                                        <button class="btn btn-success">Accept</button>
+                                        <button class="btn btn-danger">Decline</button>
+                                    </td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -365,20 +379,39 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for project in all_accepted_projects %}
                                 <tr>
-                                    <td>{{ project.id }}</td>
-                                    <td>{{ project.created_at }}</td>
-                                    <td>{{ project.title }}</td>
-                                    <td>{{ project.status }}</td>
-                                    <td class="d-flex justify-content-center gap-3" >
+                                    <td>1</td>
+                                    <td>2023-08-17</td>
+                                    <td>Project A</td>
+                                    <td>Accepted</td>
+                                    <td class="d-flex justify-content-center gap-3">
                                         <button class="btn btn-primary">View</button>
-                                        <form  action="/decline_project/{{ project.id }}" method="POST">
-                                            <button class="btn btn-danger" type="submit">Decline</button>
-                                        </form>
+                                        <button class="btn btn-success">Edit</button>
+                                        <button class="btn btn-danger">Delete</button>
                                     </td>
                                 </tr>
-                                {% endfor %}
+                                <tr>
+                                    <td>2</td>
+                                    <td>2023-08-16</td>
+                                    <td>Project B</td>
+                                    <td>Accepted</td>
+                                    <td class="d-flex justify-content-center gap-3">
+                                        <button class="btn btn-primary">View</button>
+                                        <button class="btn btn-success">Edit</button>
+                                        <button class="btn btn-danger">Delete</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>2023-08-15</td>
+                                    <td>Project C</td>
+                                    <td>Accepted</td>
+                                    <td class="d-flex justify-content-center gap-3">
+                                        <button class="btn btn-primary">View</button>
+                                        <button class="btn btn-success">Edit</button>
+                                        <button class="btn btn-danger">Delete</button>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -398,18 +431,28 @@
                                     <th>Created At</th>
                                     <th>Project Name</th>
                                     <th>Status</th>
-                                    
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for project in all_declined_projects %}
                                 <tr>
-                                    <td>{{ project.id }}</td>
-                                    <td>{{ project.created_at }}</td>
-                                    <td>{{ project.title }}</td>
-                                    <td>{{ project.status }}</td>
+                                    <td>1</td>
+                                    <td>2023-08-17</td>
+                                    <td>Project A</td>
+                                    <td>Declined</td>
+
                                 </tr>
-                                {% endfor %}
+                                <tr>
+                                    <td>2</td>
+                                    <td>2023-08-16</td>
+                                    <td>Project B</td>
+                                    <td>Declined</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>2023-08-15</td>
+                                    <td>Project C</td>
+                                    <td>Declined</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -418,7 +461,7 @@
             </div>
             <div class="tab-pane fade" id="v-pills-investors" role="tabpanel" aria-labelledby="v-pills-investors-tab"
                 tabindex="0">
-                <!-- --------------- users ----------------->
+                <!-- --------------- Declined ----------------->
                 <h2 class="text-dark  mt-5 ms-4">Investors Table</h2>
                 <div class="mt-5 ms-5">
                     <div class="col-10">
@@ -434,16 +477,30 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for investor in all_investors %}
                                 <tr>
-                                    <td>{{ investor.id }}</td>
-                                    <td>{{ investor.created_at }}</td>
-                                    <td>{{ investor.first_name }} {{ investor.last_name }}</td>
-                                    <td>{{ investor.wallet }}</td>
-                                    <td>{{ investor.investment_count }}</td>
-                                    <td>{{ investor.investment_amount }}</td>
+                                    <th scope="row">1</th>
+                                    <td>2023-08-17</td>
+                                    <td>John Doe</td>
+                                    <td>$10,000</td>
+                                    <td>3</td>
+                                    <td>$15,000</td>
                                 </tr>
-                                {% endfor %}
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>2023-08-18</td>
+                                    <td>Jane Smith</td>
+                                    <td>$8,500</td>
+                                    <td>5</td>
+                                    <td>$25,000</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>2023-08-19</td>
+                                    <td>Michael Johnson</td>
+                                    <td>$15,200</td>
+                                    <td>2</td>
+                                    <td>$10,000</td>
+                                </tr>
                             </tbody>
                         </table>
 
@@ -472,27 +529,57 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
-                                {% for project in all_pos %}
                                 <tr>
-                                    <td>{{project.id}}</td>
-                                    <td>{{project.created_at}}</td>
-                                    <td>{{ project.acceptance_date}}</td>
-                                    <td>{{ project.po}}</td>
-                                    <td>{{ project.title}}</td>
+                                    <th scope="row">1</th>
+                                    <td>2023-08-17</td>
+                                    <td>2023-08-18</td>
+                                    <td>John Doe</td>
+                                    <td>Awesome Project</td>
                                     <td>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" style="width: {{ project.percentage}}%;"
-                                        aria-valuenow="{{ project.percentage}}" aria-valuemin="0" aria-valuemax="100">{{ project.percentage}}</div>
-                                    </div>
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar" style="width: 75%;"
+                                                aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
+                                        </div>
                                     </td>
-                                    <td>{{ project.amount_raised}}</td>
-                                    <td>{{ project.capital}}</td>
-                                    <td>{{ project.goal}}</td>
-                                    <td>{{ project.deadline}}</td>
-
+                                    <td>$15,000</td>
+                                    <td>$5,000</td>
+                                    <td>$20,000</td>
+                                    <td>2023-09-30</td>
                                 </tr>
-                                {% endfor %}
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>2023-08-18</td>
+                                    <td>2023-08-19</td>
+                                    <td>Jane Smith</td>
+                                    <td>Creative Venture</td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar" style="width: 50%;"
+                                                aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+                                        </div>
+                                    </td>
+                                    <td>$25,000</td>
+                                    <td>$10,000</td>
+                                    <td>$30,000</td>
+                                    <td>2023-10-15</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>2023-08-19</td>
+                                    <td>2023-08-20</td>
+                                    <td>Michael Johnson</td>
+                                    <td>NextGen Startup</td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar" style="width: 20%;"
+                                                aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">20%</div>
+                                        </div>
+                                    </td>
+                                    <td>$10,000</td>
+                                    <td>$2,000</td>
+                                    <td>$50,000</td>
+                                    <td>2023-11-30</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
