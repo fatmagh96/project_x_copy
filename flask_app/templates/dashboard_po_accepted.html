@@ -370,28 +370,40 @@
             <!--End Updates ----------------------------->
             <!-- Start Edit---------------------------- -->
             <div class="tab-pane fade" id="edit" role="tabpanel" aria-labelledby="edit-tab">
-                <div class="mt-4">
+                <div class="mt-3">
                     <h2>Edit Your Project</h2>
-                    <form class="mt-5">
+                    <form action="/projects/edit" method="post">
+                        {% for message in get_flashed_messages(category_filter=['edit_proj'])%}
+                            <p class="text-success">{{message}}</p>
+                        {%endfor%}
                         <!-- -----------------upload video------------------- -->
-                        <div class=" col-5 ">
-                            <label class="h4 mt-3" for="">Your Video</label>
+                        <div class=" col-5 mt-5 ">
+                            <label class="h4" for="">Your Video</label>
+                            <!-- <video src="{{ url_for('static', filename=project.video.replace('flask_app/static/', '')) }}"></video> -->
                             <div class="form-group ">
                                 <label for="formFile" class="form-label">Upload video file</label>
-                                <input class="form-control mb-3" type="file" id="formFile">
+                                <input class="form-control mb-3" type="file" id="formFile" name="video" >
                             </div>
                         </div>
                         <!-- ------------------- Project registration---------------- -->
                         <div id="myTabContent" class="tab-content">
                             <div class="tab-pane fade show active" id="edit" role="tabpanel">
                                 <label class="h4 mt-3" for="">Description</label>
-                                <textarea name="Description" id="" class=" form-control w-70 " rows="5"></textarea>
+                                {% for message in get_flashed_messages(category_filter=['description'])%}
+                                    <p class="text-danger">{{message}}</p>
+                                {%endfor%}
+                                <textarea name="description" id="" class=" form-control w-70 " rows="5">{{project.description}}</textarea>
                                 <label class="h4 mt-3" for="">About Us</label>
-                                <textarea name="about_us" id="" class=" form-control w-70" rows="5"></textarea>
+                                {% for message in get_flashed_messages(category_filter=['pitch'])%}
+                                    <p class="text-danger">{{message}}</p>
+                                {%endfor%}
+                                <textarea name="pitch" id="" class=" form-control w-70" rows="5">{{project.pitch}}</textarea>
                             </div>
                         </div>
+                        <input type="hidden" name="project_id" value="{{project.id}}">
+                        <input type="submit" value="Save Changes" class="btn btn-success mt-5">
                     </form>
-                    <button class="btn btn-success mt-5">Save Changes</button>
+                    
                 </div>
             </div>
             <!-- end edit -->

@@ -163,8 +163,31 @@ class Project:
                 """
         result = connectToMySQL(DATABASE).query_db(query, data_dict)
         return result
+    
+    # ------------ UPDATE PROJECT INFO ------------------
+    @classmethod
+    def update_project_info(cls, data_dict):
+        query="""UPDATE projects SET video= %(video)s , description = %(description)s , pitch= %(pitch)s
+                    WHERE id = %(project_id)s;
+                """
+        return connectToMySQL(DATABASE).query_db(query, data_dict)
 
+    # ----- validation for update ------
+    @staticmethod
+    def validate_update(data_dict):
+        is_valid = True
 
+        if len(data_dict["description"])<10:
+            is_valid = False
+            flash("Description too short","description")
+        if len(data_dict['pitch'])<10:
+            is_valid =False
+            flash("Pitch not valid", "pitch")    
+        if data_dict['video'] =='':
+            is_valid = False
+            flash("Video is required", "video")
+        
+        return is_valid
 
 
 

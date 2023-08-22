@@ -76,3 +76,15 @@ def show_project(project_id):
     teams=Team.get_team_by_project({'project_id':project.id})
     return render_template("one_project_show.html", project = project,is_favourited=is_favourited,all_updates=all_updates, teams = teams ,user=user,total = total , percentage=percentage , time_left=time_left)
 
+@app.route('/projects/edit', methods=['POST'])
+def edit_project():
+    project = Project.get_project_by_id({'id':request.form['project_id']})
+    if request.form['video'] == "":
+        data= {
+            **request.form,
+            'video': project.video
+        }
+    if Project.validate_update(data):
+        Project.update_project_info(data)
+        flash("Changes Saved! ", 'edit_proj')
+    return redirect("/projects/dashboard/accepted#edit")
