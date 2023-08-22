@@ -92,21 +92,20 @@
     <div class="container mb-4">
         <div class="row mt-5">
             <div class="col-12">
-                <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex gap-4 align-items-center">
                     <div class="d-flex gap-4">
-                        <h1>{{project.title}}</h1>
+                        <h1><a href="/projects/{{project.id}}/show" class="text-decoration-none text-dark">{{project.title}}</a></h1>
                     </div>
                     <h4>
-                        <span
-                            class="badge rounded-pill border border-1 text-success border-success px-5 py-1">Accepted</span>
+                        <span class="badge rounded-pill text-bg-success text-white px-3 py-1">Accepted</span>
                     </h4>
                 </div>
                 <div class="d-flex gap-4">
                     <p name="submited_at">
-                        {{project.created_at}}
+                        Submitted at : {{project.created_at}}
                     </p>
                     <p name="accepted_at">
-                        {{project.created_at}}
+                        Accepted at : {{project.acceptance_date}}
                     </p>
                 </div>
             </div>
@@ -213,9 +212,9 @@
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
-                            <form class="modal-content" action="/team_member/create" method="post"
+                            <form class=" modal-content" action="/team_member/create" method="post"
                                 enctype="multipart/form-data">
-                                <div class="modal-body">
+                                <div class=" modal-body">
                                     <h1 class="p-4">Add Teammate</h1>
                                     <div class="mt-5 m-3">
                                         <div class="d-flex flex-column" id="formfield ">
@@ -245,12 +244,10 @@
                                             <input type="textarea" name="role" class="text form-control mb-3 "
                                                 placeholder="role" required>
                                             <label class="form-label " for="">Summary</label>
-                                            <!-- <input type="textarea" name="summary" class="text form-control m-3"  placeholder="summary" required> -->
                                             <textarea name="summary" id="" cols="300" class=" form-control mb-3  "
                                                 rows="5"></textarea>
                                         </div>
                                     </div>
-
                                 </div>
 
                                 <!-- -------------------------- Add Button---------------------- -->
@@ -265,21 +262,28 @@
                             </form>
                         </div>
                     </div>
+                    <!-- end modal -->
                     {% for team_member in teams %}
-                    <div class="d-flex gap-3 mt-4">
-                        <div class="avatar border border-0 rounded">
-                            <img src="{{ url_for('static', filename=team_member.image.replace('flask_app/static/', '')) }}"
-                                alt="" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
+                    <div class="card p-2 mt-4">
+                        <div class=" d-flex  justify-content-between">
+                            <div class=" d-flex  gap-3 w-100">
+                                <div class="avatar border border-0 rounded " style="width: 20%;">
+                                    <img src="{{ url_for('static', filename=team_member.image.replace('flask_app/static/', '')) }}"
+                                        alt="" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
+                                </div>
+                                <div class="p-4 " style="width: 70%;">
+                                    <h4>{{team_member.first_name}} {{team_member.last_name}}</h4>
+                                    <h6 class="text-dark">{{team_member.role}}</h6>
+                                    <p>{{team_member.summary}}</p>
+                                </div>
+
+                            </div>
+
+                            <form class="d-flex jusutify-content-end" action="/team/destroy" method="post">
+                                <input type="hidden" name="id" value="{{team_member.id}}">
+                                <button class="btn btn-danger align-center " style="height: 40px;">Delete</button>
+                            </form>
                         </div>
-                        <div class="p-4">
-                            <h4>{{team_member.first_name}} {{team_member.last_name}}</h4>
-                            <h6 class="text-dark">{{team_member.role}}</h6>
-                            <p>{{team_member.summary}}</p>
-                        </div>
-                        <form action="/team/destroy" method="post">
-                            <input type="hidden" name="id" value="{{team_member.id}}">
-                            <button class="btn btn-danger align-center" style="height: 40px;">Delete</button>
-                        </form>
                     </div>
                     {% endfor%}
                 </div>
@@ -321,7 +325,7 @@
                                             </div>
                                             <div class="d-flex flex-column gap-2">
                                                 <div>
-                                                    <label class="form-label " for="">Descriptions</label>
+                                                    <label class="form-label mt-4" for="">Descriptions</label>
                                                     <!-- <input type="textarea" name="summary" class="text form-control m-3"  placeholder="summary" required> -->
                                                     <textarea name="description" id="descriptionInput" cols="300"
                                                         class=" form-control mb-3  " rows="5"> </textarea>
@@ -330,17 +334,22 @@
                                             </div>
                                         </div>
                                         <!-- <button type="button" class="btn btn-primary" onclick="addPhotoDescription()">Add</button> -->
-                                        <input type="submit" value="Add" class="btn btn-primary">
+                                        <div class="d-flex justify-content-end m-3 gap-2">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+
+                                            <input type="submit" value="Add" class="btn btn-primary">
+                                        </div>
                                     </form>
                                 </div>
 
                                 <!-- -------------------------- Add Button---------------------- -->
 
-                                <div class="d-flex justify-content-end m-3 gap-2">
+                                <!-- <div class="d-flex justify-content-end m-3 gap-2">
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Close</button>
 
-                                </div>
+                                </div> -->
                                 <!--  the new photos -->
                                 <!-- ----------------------------------------------------------- -->
                             </div>
@@ -374,7 +383,7 @@
                     <h2>Edit Your Project</h2>
                     <form action="/projects/edit" method="post">
                         {% for message in get_flashed_messages(category_filter=['edit_proj'])%}
-                            <p class="text-success">{{message}}</p>
+                        <p class="text-success">{{message}}</p>
                         {%endfor%}
                         <!-- -----------------upload video------------------- -->
                         <div class=" col-5 mt-5 ">
@@ -382,7 +391,7 @@
                             <!-- <video src="{{ url_for('static', filename=project.video.replace('flask_app/static/', '')) }}"></video> -->
                             <div class="form-group ">
                                 <label for="formFile" class="form-label">Upload video file</label>
-                                <input class="form-control mb-3" type="file" id="formFile" name="video" >
+                                <input class="form-control mb-3" type="file" id="formFile" name="video">
                             </div>
                         </div>
                         <!-- ------------------- Project registration---------------- -->
@@ -390,20 +399,22 @@
                             <div class="tab-pane fade show active" id="edit" role="tabpanel">
                                 <label class="h4 mt-3" for="">Description</label>
                                 {% for message in get_flashed_messages(category_filter=['description'])%}
-                                    <p class="text-danger">{{message}}</p>
+                                <p class="text-danger">{{message}}</p>
                                 {%endfor%}
-                                <textarea name="description" id="" class=" form-control w-70 " rows="5">{{project.description}}</textarea>
+                                <textarea name="description" id="" class=" form-control w-70 "
+                                    rows="5">{{project.description}}</textarea>
                                 <label class="h4 mt-3" for="">About Us</label>
                                 {% for message in get_flashed_messages(category_filter=['pitch'])%}
-                                    <p class="text-danger">{{message}}</p>
+                                <p class="text-danger">{{message}}</p>
                                 {%endfor%}
-                                <textarea name="pitch" id="" class=" form-control w-70" rows="5">{{project.pitch}}</textarea>
+                                <textarea name="pitch" id="" class=" form-control w-70"
+                                    rows="5">{{project.pitch}}</textarea>
                             </div>
                         </div>
                         <input type="hidden" name="project_id" value="{{project.id}}">
                         <input type="submit" value="Save Changes" class="btn btn-success mt-5">
                     </form>
-                    
+
                 </div>
             </div>
             <!-- end edit -->
