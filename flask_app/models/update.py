@@ -33,8 +33,9 @@ class Update():
         results= connectToMySQL(DATABASE).query_db(query, data)
         #organize the results
         updates=[]
-        for row in results:
-            updates.append(cls(row))
+        if results:
+            for row in results:
+                updates.append(cls(row))
         return updates
     
     #get one update by id

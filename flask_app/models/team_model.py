@@ -37,6 +37,19 @@ class Team():
                 team.append(cls(row))
         return team
     
+    # ------------ GET TEAM BY PROJECT ------
+    @classmethod
+    def get_team_by_project(cls,data):
+        query="SELECT * FROM team_members WHERE project_id = %(project_id)s;"
+
+        results= connectToMySQL(DATABASE).query_db(query, data)
+        #organize the results
+        team=[]
+        if results:
+            for row in results:
+                team.append(cls(row))
+        return team
+    
     #!-----------------get one teammate by project_id---------
     @classmethod
     def get_team_member_by_id(cls,data):

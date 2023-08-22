@@ -16,9 +16,9 @@ bcrypt = Bcrypt(app)
 
 @app.route('/projects/dashboard/accepted')
 def po_dashboard_accepted():
-    teams=Team.get_team()
     project = Project.get_project_by_user_id({'user_id':session['id']})
     update = Update.get_by_id_update({'id':project.id})
+    teams=Team.get_team_by_project({'project_id':project.id})
     all_updates = Update.get_updates({'project_id':project.id})
     return render_template('dashboard_po_accepted.html',teams=teams ,project = project , update=update, all_updates=all_updates )
 
@@ -58,6 +58,11 @@ def show_project(project_id):
     percentage = round(percentage_value, 1)
 
     user = User.get_user_by_id(session)
-    is_favourited = User.get_favourite({'user_id':user.id, 'project_id':project_id})
-    return render_template("one_project_show.html", project = project,is_favourited=is_favourited ,user=user,total = total , percentage=percentage , time_left=time_left)
+    if user:
+        is_favourited = User.get_favourite({'user_id':user.id, 'project_id':project_id})
+    else:
+        is_favourited = False
+    all_updates = Update.get_updates({'project_id':project.id})
+    teams=Team.get_team_by_project({'project_id':project.id})
+    return render_template("one_project_show.html", project = project,is_favourited=is_favourited,all_updates=all_updates, teams = teams ,user=user,total = total , percentage=percentage , time_left=time_left)
 
