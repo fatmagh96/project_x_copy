@@ -202,11 +202,11 @@
               {% for investment in investments %}
                 <tr class="">
                   <td><a href="/projects/{{investment.project.id}}/show" class="underline-on-hover1 text-dark" style="vertical-align: middle;">{{investment.project.title}}</a></td>
-                  <td class="fw-bolder mt-4">{{investment.amount}}$</td>
+                  <td class="fw-bolder mt-4">{{investment.amount}} TND</td>
                   <td>
                     <span class="d-flex justify-content-between">
                       <span class="text-success">{{investment.project.percentage}}%</span>
-                      <span>{{investment.project.total}}$/{{investment.project.goal}}$</span>
+                      <span>{{investment.project.total}} TND/{{investment.project.goal}} TND</span>
                     </span>
                     <div class="progress">
                       <div class="progress-bar bg-success" role="progressbar" style="width: {{investment.project.percentage}}%;" aria-valuenow="{{investment.project.percentage}}"
@@ -243,7 +243,7 @@
                 <td>
                   <span class="d-flex justify-content-between">
                     <span class="text-success">{{favourite.percentage}}%</span>
-                    <span>{{favourite.total}}$/{{favourite.goal}}$</span>
+                    <span>{{favourite.total}} TND/{{favourite.goal}} TND</span>
                   </span>
                   <div class="progress">
                     <div class="progress-bar bg-success" role="progressbar" style="width: {{favourite.percentage}}%;" aria-valuenow="{{favourite.percentage}}"
@@ -347,7 +347,7 @@
                   13/12/2018 01:58
                 </td>
                 <td>
-                  <span class="text-success">+ 200$</span>
+                  <span class="text-success">+ 200 TND</span>
                 </td>
 
               </tr>
@@ -359,7 +359,7 @@
                   13/12/2018 01:58
                 </td>
                 <td>
-                  <span class="text-danger">- 50$</span>
+                  <span class="text-danger">- 50 TND</span>
                 </td>
               </tr>
               <tr>
@@ -369,7 +369,7 @@
                   09/07/2018 08:05
                 </td>
                 <td>
-                  <span class="text-danger">- 1000$</span>
+                  <span class="text-danger">- 1000 TND</span>
                 </td>
               </tr>
             </tbody>
