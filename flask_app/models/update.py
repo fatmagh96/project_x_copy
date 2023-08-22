@@ -28,7 +28,7 @@ class Update():
     #get all updates
     @classmethod
     def get_updates(cls,data):
-        query="SELECT * FROM updates WHERE project_id = %(project_id)s;"
+        query="SELECT * FROM updates WHERE project_id = %(project_id)s ORDER BY id desc;"
 
         results= connectToMySQL(DATABASE).query_db(query, data)
         #organize the results

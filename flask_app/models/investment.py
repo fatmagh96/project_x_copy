@@ -79,9 +79,10 @@ class Investment:
                 """
         result = connectToMySQL(DATABASE).query_db(query, data_dict)
         all_investments = []
-        for row in result:
-            investment = cls(row)
-            investment.project_title = row['title']
-            all_investments.append(investment)
+        if result:
+            for row in result:
+                investment = cls(row)
+                investment.project_title = row['title']
+                all_investments.append(investment)
         return all_investments
 
