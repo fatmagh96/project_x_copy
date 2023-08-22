@@ -116,104 +116,28 @@
 
     <div class="page-content">
       {% for project in projects%}
-
-      <div class="card col-3" style="background-image: url('../static/assets/{{project.image}}'); background-size: cover;">
+      <!-- url("{{ url_for('static', filename=project.image.replace('flask_app/static/', '')) }}")
+      style="background-image: url('c:/Users/fghra/OneDrive/Bureau/Coding_Dojo/project_copy/project_x_copy/flask_app/{{project.image}}'); background-size: cover;" -->
+      <!-- <div class="card col-3">
+        <img src="{{ url_for('static', filename=project.image.replace('flask_app/static/', '')) }}" alt="">
         <div class="content">
           <h2 class="title">{{project.title}}</h2>
-          <!-- <p class="copy">Beyond ChatGPT - AI Brain for work </p> -->
+         
           <button class="btncard"><a href="/projects/{{project.id}}/show" class="text-decoration-none text-light">View
               Project</a></button>
+        </div>
+      </div> -->
+      <div class="card col-3 bg-light text-white">
+        <img src="{{ url_for('static', filename=project.image.replace('flask_app/static/', '')) }}" alt="" height="100%" width="100%">
+        <div class="card-img-overlay d-flex flex-column align-items-center justify-content-between">
+          <div class="card-title contour-noir h2">{{project.title}}</div>
+          <button class="btncard"><a href="/projects/{{project.id}}/show" class="text-decoration-none text-light">View
+            Project</a></button>
         </div>
       </div>
 
       {% endfor %}
-      <!-- <div class="card col-3" style="background-image: url('../static/assets/companies/moto.jpg');">
-        <div class="content">
-          <h2 class="title">Curtiss Motorcycle</h2>
-          <p class="copy">Iconic Electric Motorcycles</p>
-          <button class="btncard">Details</button>
-        </div>
-      </div>
-      <div class="card col-3" style="background-image: url('../static/assets/companies/spinn.webp');">
-        <div class="content">
-          <h2 class="title">Spinn</h2>
-          <p class="copy">Building the future of coffee</p>
-          <button class="btncard">Details</button>
-        </div>
-      </div>
-      <div class="card col-3" style="background-image: url('../static/assets/companies/volup.jpg');">
-        <div class="content">
-          <h2 class="title">Volup</h2>
-          <p class="copy">Bringing the hight-end food industry to you</p>
-          <button class="btncard">Details</button>
 
-        </div>
-      </div>
-    
-
-    
-      <div class="card col-3" style="background-image: url('../static/assets/companies/zennihome.jpg');">
-        <div class="content">
-          <h2 class="title">Zennihome</h2>
-          <p class="copy">ZenniHome is transforming the housing industry with beautiful homes that are built on a
-            factory assembly line.</p>
-          <button class="btncard">Details</button>
-        </div>
-      </div>
-      <div class="card col-3">
-        <div class="card" style="background-image: url('../static/assets/companies/smartvid.jpg');">
-          <div class="content">
-            <h2 class="title">Smart_Video</h2>
-            <p class="copy">Helping people take better decisions with smart video analysis</p>
-            <button class="btncard">Details</button>
-          </div>
-        </div>
-      </div>
-      <div class="card col-3">
-        <div class="content">
-          <h2 class="title">404 Not Found</h2>
-          <p class="copy">Not yet</p>
-          <button class="btncard">Details</button>
-        </div>
-      </div>
-      <div class="card col-3">
-        <div class="content">
-          <h2 class="title">404 Not Found</h2>
-          <p class="copy">Not yet</p>
-          <button class="btncard">Details</button>
-        </div>
-      </div>
-    
-
-    
-      <div class="card col-3">
-        <div class="content">
-          <h2 class="title">404 Not Found</h2>
-          <p class="copy">Not yet</p>
-          <button class="btncard">Details</button>
-        </div>
-      </div>
-      <div class="card col-3">
-        <div class="content">
-          <h2 class="title">404 Not Found</h2>
-          <p class="copy">Not yet</p>
-          <button class="btncard">Details</button>
-        </div>
-      </div>
-      <div class="card col-3">
-        <div class="content">
-          <h2 class="title">404 Not Found</h2>
-          <p class="copy">Not yet</p>
-          <button class="btncard">Details</button>
-        </div>
-      </div>
-      <div class="card col-3">
-        <div class="content">
-          <h2 class="title">404 Not Found</h2>
-          <p class="copy">Not yet</p>
-          <button class="btncard">Details</button>
-        </div>
-      </div> -->
     </div>
 
     <div aria-label="Page navigation ">

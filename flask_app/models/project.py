@@ -25,6 +25,7 @@ class Project:
         self.acceptance_date = data_dict['acceptance_date']
         self.image = data_dict['image']
         self.video = data_dict['video']
+        self.business_plan = data_dict['business_plan']
         self.created_at = data_dict['created_at']
         self.updated_at = data_dict['updated_at']
         self.investors = []
@@ -213,13 +214,13 @@ class Project:
         if len(data_dict['pitch'])<10:
             is_valid =False
             flash("Pitch not valid", "pitch")    
-        if data_dict['image'] =='':
-            is_valid = False
-            flash("image is required", "image")
+        # if data_dict['image'] =='':
+        #     is_valid = False
+        #     flash("image is required", "image")
 
-        if data_dict['video'] =='':
-            is_valid = False
-            flash("Video is required", "video")
+        # if data_dict['video'] =='':
+        #     is_valid = False
+        #     flash("Video is required", "video")
         
         if 'category' not in data_dict or data_dict['category'] not in {
             "technology", "engineering", "business", 
@@ -248,15 +249,15 @@ class Project:
         
 
         max_future_date = datetime.now() + timedelta(days=5 * 365) 
-        date_obj = datetime.strptime( data_dict['deadline'], '%Y-%m-%d')
+        # date_obj = datetime.strptime( data_dict['deadline'], '%Y-%m-%d')
 
-        if data_dict['deadline'] == "":
+        if not data_dict['deadline']:
             is_valid = False
             flash("Date is required", "deadline")
-        elif date_obj < datetime.now():
+        elif datetime.strptime( data_dict['deadline'], '%Y-%m-%d') < datetime.now():
             is_valid = False
             flash("Date should start from today", "deadline")
-        elif date_obj > max_future_date:
+        elif datetime.strptime( data_dict['deadline'], '%Y-%m-%d') > max_future_date:
             is_valid = False
             flash("Date cannot be superior to 5 years from now", "deadline")
         
@@ -269,9 +270,9 @@ class Project:
             flash("Bank details not valid", "bank_details")
 
         
-        if data_dict['business_plan'] =='':
-            is_valid = False
-            flash("business plan file is required", "business_plan")
+        # if data_dict['business_plan'] =='':
+        #     is_valid = False
+        #     flash("business plan file is required", "business_plan")
 
         # if not data_dict.get('terms'):
         #     is_valid = False

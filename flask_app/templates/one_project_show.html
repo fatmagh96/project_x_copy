@@ -102,9 +102,10 @@
     </div>
     <div class="row d-flex gap-5">
       <div class="col-8">
-
+        <!-- url("{{ url_for('static', filename=project.image.replace('flask_app/static/', '')) }}") -->
         <video controls width="100%">
-          <source src="{{ url_for('static', filename='assets/'+project.video) }}" type="video/mp4">
+          <source src="{{ url_for('static', filename=project.video.replace('flask_app/static/', '')) }}"
+            type="video/mp4">
           Your browser does not support the video tag.
         </video>
         <div class="container mt-5">
@@ -137,22 +138,22 @@
             <!-- Our Team -->
             <div class="tab-pane fade" id="team" role="tabpanel">
               {% for team_member in teams %}
-                    <div class="d-flex gap-3 mt-4">
-                        <div class="avatar border border-0 rounded">
-                            <img src="{{ url_for('static', filename=team_member.image.replace('flask_app/static/', '')) }}"
-                                alt="" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
-                        </div>
-                        <div class="p-4">
-                            <h4>{{team_member.first_name}} {{team_member.last_name}}</h4>
-                            <h6 class="text-dark">{{team_member.role}}</h6>
-                            <p>{{team_member.summary}}</p>
-                        </div>
-                        <!-- <form action="/team/destroy" method="post">
+              <div class="d-flex gap-3 mt-4">
+                <div class="avatar border border-0 rounded">
+                  <img src="{{ url_for('static', filename=team_member.image.replace('flask_app/static/', '')) }}" alt=""
+                    class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
+                </div>
+                <div class="p-4">
+                  <h4>{{team_member.first_name}} {{team_member.last_name}}</h4>
+                  <h6 class="text-dark">{{team_member.role}}</h6>
+                  <p>{{team_member.summary}}</p>
+                </div>
+                <!-- <form action="/team/destroy" method="post">
                             <input type="hidden" name="id" value="{{team_member.id}}">
                             <button class="btn btn-danger align-center" style="height: 40px;">Delete</button>
                         </form> -->
-                    </div>
-                    {% endfor%}
+              </div>
+              {% endfor%}
               <!-- <div class="d-flex gap-3 mt-4">
                 <div class="avatar border border-0 rounded">
                   <img
@@ -182,25 +183,22 @@
 
             <!-- Updates -->
             <div class="tab-pane fade" id="updates" role="tabpanel">
-              <div class="container col-8 ms-3">
+              <div class="container col-12 ">
                 {% for update in all_updates %}
                 <div class="card p-2 mt-4 mb-3 ms-3 card_update">
-                    <h3 class="mt-2 mb-3">{{ update.title }}</h3>
-                    <img src="{{ url_for('static', filename=update.image.replace('flask_app/static/', '')) }}"
-                        alt="{{ update.title }}" width="700rem" height="400rem">
+                  <h3 class="mt-2 mb-3">{{ update.title }}</h3>
+                  <img src="{{ url_for('static', filename=update.image.replace('flask_app/static/', '')) }}"
+                    alt="{{ update.title }}" width="500rem" height="350rem">
 
-                    <div class="content mt-3">
-                        <p>
-                            {{ update.description }}
-                        </p>
-                    </div>
-                    <!-- <form class="d-flex justify-content-end" action="/updates/destroy" method="post">
-                        <input type="hidden" name="id" value="{{update.id}}">
-                        <button class="btn btn-danger   align-center" style="height: 40px;">Delete</button>
-                    </form> -->
+                  <div class="content mt-3">
+                    <p>
+                      {{ update.description }}
+                    </p>
+                  </div>
+
                 </div>
                 {% endfor %}
-            </div>
+              </div>
               <!-- <div class="container  ms-3">
                 <h3 class="mt-4">Title</h3>
                 <div class=" p-3 mb-3 card_update">
@@ -268,12 +266,12 @@
       </div>
 
       <!-- -------SIDE BAR ---------- -->
-      <div class="col-3 card" style="height: 27rem; position: sticky; top: 10px;">
+      <div class="col-3 card" style="height: 30rem; position: sticky; top: 10px;">
         <div class="m-3">
-          <h2 class="my-4" style="letter-spacing: 1px;">{{total}}$</h2>
+          <h2 class="my-4" style="letter-spacing: 1px;">{{total}} TND</h2>
           <span class="d-flex justify-content-between">
             <span class="text-success">{{percentage}}%</span>
-            <span>{{total}}$/{{project.goal}}$</span>
+            <span>{{total}} TND/{{project.goal}} TND</span>
           </span>
           <div class="progress">
             <div class="progress-bar bg-success" role="progressbar" style="width: {{percentage}}%;" aria-valuenow="25"
@@ -281,7 +279,7 @@
           </div>
           <div class="mt-4">
             <h6>Goal:</h6>
-            <h6>{{project.goal}}$</h6>
+            <h6>{{project.goal}} TND</h6>
           </div>
           <div class="d-flex justify-content-between align-items-center">
             <h6>Time Left:</h6>
@@ -289,19 +287,19 @@
           </div>
           <!-- <form action="/investments/new/{{project.id}}" method="post"></form> -->
           {% if 'id' not in session %}
-            <div class="mt-5 mb-2">
-              <a href="/signin" class="btn btn-success w-100">Invest</a>
-            </div>
-            <button class="wf-btn-o wf-btn-normal w-100 text-sm btn btn-outline-danger mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill"
-                viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-              </svg>
-              <span>Favourite</span>
-            </button>
+          <div class="mt-5 mb-2">
+            <a href="/signin" class="btn btn-success w-100">Invest</a>
+          </div>
+          <button class="wf-btn-o wf-btn-normal w-100 text-sm btn btn-outline-danger mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill"
+              viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+            </svg>
+            <span>Favourite</span>
+          </button>
           {% elif user.type == 'investor' %}
           <form action="/investments/new/{{project.id}}" method="post">
-            <div class="row d-flex justify-content-between align-items-baseline">
+            <div class="row d-flex justify-content-between align-items-baseline mt-3">
               {% for message in get_flashed_messages(category_filter=['investment_danger'])%}
               <p class="text-danger">{{message}}</p>
               {%endfor%}
@@ -312,49 +310,50 @@
                 <label for="" class="fs-6">Amount (TND):</label>
               </div>
               <div class="col">
-                  <input type="number" id="float-number" name="amount" min="0.1" class="form-control mt-4 mb-1"
-                    step="0.1" placeholder="0">
+                <input type="number" id="float-number" name="amount" min="0.1" class="form-control  mb-1" step="0.1"
+                  placeholder="0" required>
               </div>
+              <input type="hidden" name="user_id" value="{{user.id}}">
             </div>
             <input type="submit" value="Invest" class="btn btn-success w-100  ">
           </form>
-            {% if is_favourited %}
-            <button class="wf-btn-o wf-btn-normal btn btn-danger  w-100 text-sm mt-2 mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill white-heart"
-                viewBox="0 0 16 16">
+          {% if is_favourited %}
+          <button class="wf-btn-o wf-btn-normal btn btn-danger  w-100 text-sm mt-2 mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-heart-fill white-heart" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+            </svg>
+            <span>Favourited</span>
+          </button>
+          {%else%}
+          <form action="/add_to_favourites" method="post">
+            <input type="hidden" name="project_id" value="{{project.id}}">
+            <input type="hidden" name="user_id" value="{{user.id}}">
+            <button id="favouriteBtn" class="wf-btn-o wf-btn-normal w-100 text-sm btn btn-outline-danger mb-4 mt-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-heart-fill" viewBox="0 0 16 16">
                 <path fill-rule="evenodd"
                   d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
               </svg>
-              <span>Favourited</span>
-            </button>
-            {%else%}
-              <form action="/add_to_favourites" method="post">
-                <input type="hidden" name="project_id" value="{{project.id}}">
-                <input type="hidden" name="user_id" value="{{user.id}}">
-                <button id="favouriteBtn" class="wf-btn-o wf-btn-normal w-100 text-sm btn btn-outline-danger mb-4 mt-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill"
-                    viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-                  </svg>
-                  <span>Favourite</span>
-                </button>
-              </form>
-            {%endif%}
-          {% else%}
-            <div class="mt-5 mb-2">
-              <a href="/signin" class="btn btn-success w-100">Invest</a>
-            </div>
-            <button class="wf-btn-o wf-btn-normal w-100 text-sm btn btn-outline-danger mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill"
-                viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-              </svg>
               <span>Favourite</span>
             </button>
-            
+          </form>
+          {%endif%}
+          {% else%}
+          <div class="mt-5 mb-2">
+            <a href="/signin" class="btn btn-success w-100">Invest</a>
+          </div>
+          <button class="wf-btn-o wf-btn-normal w-100 text-sm btn btn-outline-danger mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill"
+              viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+            </svg>
+            <span>Favourite</span>
+          </button>
+
           {%endif%}
 
-          
+
         </div>
 
       </div>

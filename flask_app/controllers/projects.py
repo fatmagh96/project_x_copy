@@ -38,17 +38,55 @@ def po_dashboard_pending():
     project = Project.get_project_by_user_id({'user_id':session['id']})
     return render_template('dashboard_po_Pending.html', project = project)
 
+@app.route('/projects/dashboard/rejected')
+def po_dashboard_rejected():
+    project = Project.get_project_by_user_id({'user_id':session['id']})
+    return render_template('dashboard_po_Rejected.html', project = project)
 
 
 @app.route('/projects/create', methods=['POST'])
 def create_project():
     print('PROJECT REQUEST FORM', request.form)
+    print('FILLELEELELLE', request.files['image'])
     user = User.get_user_by_id(session)
     if Project.validate(request.form):
-        data = {
-            **request.form,
-            'user_id': user.id
-        }
+        # data = {
+        #     **request.form,
+        #     'user_id': user.id
+        # }
+        pic ="flask_app/static/img/"
+        vid="flask_app/static/img/"
+        file ="flask_app/static/img/"
+        if not request.files['image']:
+            flash("image is required", "image")
+            return redirect('/register/project')
+        else:
+            uploaded_file = request.files['image']
+            pic = 'flask_app/static/img/' + uploaded_file.filename
+            uploaded_file.save(pic)
+        if not request.files['video']:
+            flash("video is required", "video")
+            return redirect('/register/project')
+        else:
+            uploaded_file = request.files['video']
+            vid = 'flask_app/static/img/' + uploaded_file.filename
+            uploaded_file.save(vid)
+        if not request.files['business_plan']:
+            flash("business plan is required", "business_plan")
+            file =""
+            return redirect('/register/project')
+        else:
+            uploaded_file = request.files['business_plan']
+            file = 'flask_app/static/img/' + uploaded_file.filename
+            uploaded_file.save(file)
+
+            data = {    
+                **request.form,
+                'image': pic,
+                'video':vid,
+                'business_plan':file,
+                'user_id': user.id  
+            }
         Project.create_project(data)
         return redirect('/projects/dashboard/pending')
     return redirect('/register/project')

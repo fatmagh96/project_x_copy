@@ -46,6 +46,8 @@ def dashboard():
             return redirect('/projects/dashboard/pending')
         if project.status == 'accepted':
             return redirect('/projects/dashboard/accepted')
+        if project.status == 'rejected':
+            return redirect('/projects/dashboard/rejected')
         
 
 @app.route('/users/create', methods = ['POST'])

@@ -265,42 +265,42 @@
                                         <th scope="row">1</th>
                                         <td>Investor A</td>
                                         <td>5</td>
-                                        <td>$500,000</td>
+                                        <td>TND 500,000</td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
                                         <th scope="row">2</th>
                                         <td>Investor B</td>
                                         <td>3</td>
-                                        <td>$300,000</td>
+                                        <td>TND 300,000</td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
                                         <th scope="row">3</th>
                                         <td>Investor C</td>
                                         <td>7</td>
-                                        <td>$750,000</td>
+                                        <td>TND 750,000</td>
                                     </tr>
                                     <tr>
                                         <td>4</td>
                                         <th scope="row">3</th>
                                         <td>Investor C</td>
                                         <td>7</td>
-                                        <td>$750,000</td>
+                                        <td>TND 750,000</td>
                                     </tr>
                                     <tr>
                                         <td>5</td>
                                         <th scope="row">3</th>
                                         <td>Investor C</td>
                                         <td>7</td>
-                                        <td>$750,000</td>
+                                        <td>TND 750,000</td>
                                     </tr>
                                     <tr>
                                         <td>6</td>
                                         <th scope="row">3</th>
                                         <td>Investor C</td>
                                         <td>7</td>
-                                        <td>$750,000</td>
+                                        <td>TND 750,000</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -332,7 +332,10 @@
                                     <td>{{ project.title }}</td>
                                     <td>{{ project.status }}</td>
                                     <td class="d-flex justify-content-center gap-3" >
-                                        <button class="btn btn-primary">View Documents</button>
+                                        <!-- <button class="btn btn-primary"><a href="/download/{{project.business_plan}}" class="text-light">View Documents</a></button> -->
+                                        <a href="/download{{ url_for('static', filename=project.business_plan.replace('flask_app/static/', '')) }}" class="btn btn-primary">View Documents</a>
+                                        
+                                        <!-- "/download{{ url_for('static', filename=project.business_plan.replace('flask_app/static/img/', '')) }}" -->
                                         <form  action="/accept_project/{{ project.id }}" method="POST">
                                             <button class="btn btn-success" type="submit">Accept</button>
                                         </form>
@@ -372,7 +375,8 @@
                                     <td>{{ project.title }}</td>
                                     <td>{{ project.status }}</td>
                                     <td class="d-flex justify-content-center gap-3" >
-                                        <button class="btn btn-primary">View</button>
+                                        <!-- <button class="btn btn-primary">View</button> -->
+                                        <a href="/projects/{{project.id}}/show" class="btn btn-primary">View</a>
                                         <form  action="/decline_project/{{ project.id }}" method="POST">
                                             <button class="btn btn-danger" type="submit">Decline</button>
                                         </form>
