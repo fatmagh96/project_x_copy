@@ -48,8 +48,8 @@ class Investment:
                 }
                 investment.project = Project(data)
                 all_investments.append(investment)
-            return all_investments
-        return False
+        return all_investments
+        # return False
     
     # @classmethod
     # def get_all_investments_by_user_id(cls, data_dict):

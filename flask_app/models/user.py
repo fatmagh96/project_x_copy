@@ -67,8 +67,9 @@ class User:
         query = "SELECT * FROM users WHERE type = 'po';"
         result = connectToMySQL(DATABASE).query_db(query)
         all_pos = []
-        for row in result:
-            all_pos.append(cls(row))
+        if result:
+            for row in result:
+                all_pos.append(cls(row))
         return all_pos
     ####################################
     
